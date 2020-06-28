@@ -1,0 +1,10 @@
+html {
+  font-size: 62.5%;
+}
+h2 {
+  font-size: 3rem;
+}
+
+p, input, label, a, span {
+  font-size: 1.6rem;
+}
