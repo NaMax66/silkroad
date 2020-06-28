@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <form class="col-lg-4">
+    <form class="col-lg-4" v-if="!authorized">
       <div class="form-group">
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Введите пароль">
+        <input v-model="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Введите пароль">
       </div>
-      <button type="submit" class="btn btn-danger">Войти</button>
+      <button @click="checkPass" class="btn btn-danger">Войти</button>
     </form>
   </div>
 </template>
@@ -14,8 +14,7 @@ import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'Admin',
   data: () => ({
-    authorized: false,
-    password: 'salam'
+    authorized: false
   }),
   computed: {
     ...mapGetters(['getPrice'])
@@ -24,7 +23,12 @@ export default {
     this.initPrice()
   },
   methods: {
-    ...mapMutations(['initPrice'])
+    ...mapMutations(['initPrice']),
+    checkPass () {
+      if (this.password === 'salam') {
+        this.authorized = true
+      }
+    }
   }
 }
 
