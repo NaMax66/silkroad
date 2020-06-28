@@ -1,9 +1,19 @@
 <template>
   <div id="app">
-    <div id="nav" class="container">
-      <router-link to="/">Главная</router-link> <span>|</span>
-      <router-link to="/order">Заказать</router-link> <span>|</span>
-      <router-link to="/admin">Админ</router-link>
+    <div id="nav" class="mb-5">
+      <div class="navbar navbar-expand-lg navbar-light bg-light">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <router-link class="nav-link" to="/">Главная</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/order">Заказать</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/admin">Админ</router-link>
+          </li>
+        </ul>
+      </div>
     </div>
     <router-view/>
   </div>
@@ -15,17 +25,15 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  max-width: 120rem;
 }
 
 #nav {
-  padding: 3rem;
   &  a {
     font-weight: bold;
     color: #2c3e50;
   }
   & a.router-link-exact-active {
-    color: #42b983;
+    color: #dc3545;
   }
 }
 </style>

@@ -7,28 +7,28 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    price: null
+    priceList: 1
   },
   getters: {
     getPrice (state) {
-      return state.price
+      return state.priceList
     }
   },
   mutations: {
-    initPrice (state, payload) {
-      state.price = payload
-    },
-    changePrice (state, payload) {
-      state.price = payload
-    }
-  },
-  actions: {
-    initPrice ({ commit }) {
+    initPrice (state) {
       let price = {}
       if (env === 'development') {
         price = priceExample
       }
-      commit('initPrice', price)
+      state.priceList = price
+    },
+    changePrice (state, payload) {
+      state.priceList = payload
+    }
+  },
+  actions: {
+    initPrice ({ commit }) {
+      commit('initPrice')
     },
     changePrice ({ commit }, price) {
       commit('changePrice', price)
