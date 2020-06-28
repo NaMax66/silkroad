@@ -7,7 +7,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    priceList: 1
+    priceList: null,
+    order: []
   },
   getters: {
     getPrice (state) {
@@ -24,6 +25,12 @@ export default new Vuex.Store({
     },
     changePrice (state, payload) {
       state.priceList = payload
+    },
+    addToOrder (state, payload) {
+      const el = state.order.find(el => el.id === payload.id)
+      if (el) {
+        el.amount += payload
+      }
     }
   },
   actions: {
@@ -32,6 +39,9 @@ export default new Vuex.Store({
     },
     changePrice ({ commit }, price) {
       commit('changePrice', price)
+    },
+    addToOrder ({ commit }, amount) {
+      commit('addToOrder', amount)
     }
   },
   modules: {
