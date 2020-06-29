@@ -13,6 +13,9 @@ export default new Vuex.Store({
   getters: {
     getPrice (state) {
       return state.priceList
+    },
+    getOrder (state) {
+      return state.order
     }
   },
   mutations: {

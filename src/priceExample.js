@@ -5,24 +5,21 @@ export default {
       id: '1',
       name: 'Пакет "Гриль"',
       price: 0.35,
-      packageAmount: 50,
-      rate: 100,
+      packageAmount: 100,
       comment: 'Берите пока дешево'
     },
     {
       id: '1',
       name: 'Пакет "Звёздочка"',
       price: 1.2,
-      packageAmount: 20,
-      rate: 40,
+      packageAmount: 50,
       comment: 'Берите пока дешево'
     },
     {
       id: '1',
       name: 'Рулон "Люкс" Красный Короткий',
       price: 70,
-      packageAmount: 10,
-      rate: 20,
+      packageAmount: 1,
       comment: 'Берите пока дешево'
     }
   ]
