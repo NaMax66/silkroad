@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import priceExample from '@/priceExample'
+
 const env = process.env.NODE_ENV
 
 Vue.use(Vuex)
@@ -16,6 +17,12 @@ export default new Vuex.Store({
     },
     getOrder (state) {
       return state.order
+    },
+    getTotalOrderSum (state) {
+      return state.order.length ? state.order.reduce((acc, el) => {
+        acc += el.amount
+        return acc
+      }, 0) : 0
     }
   },
   mutations: {

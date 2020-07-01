@@ -13,7 +13,7 @@
       </thead>
       <tbody>
       <tr v-for="(product, index) in getPrice.list" :key="product.id">
-        <th scope="row">{{ index }}</th>
+        <td scope="row">{{ index }}</td>
         <td>{{product.name}}</td>
         <td>{{product.price | getNicePrice}}</td>
         <td>{{product.packageAmount}} шт.</td>
@@ -25,6 +25,10 @@
           </div>
         </th>
         <td>{{getProductPrice(product)}}</td>
+      </tr>
+      <tr>
+        <td colspan="5" class="text-right">Итого на сумму:</td>
+        <td>{{getTotalOrderSum | getNicePrice}}</td>
       </tr>
       </tbody>
     </table>
@@ -42,7 +46,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getPrice', 'getOrder'])
+    ...mapGetters(['getPrice', 'getOrder', 'getTotalOrderSum'])
   },
   created () {
     this.initPrice()
