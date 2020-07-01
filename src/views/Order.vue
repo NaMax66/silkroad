@@ -32,16 +32,44 @@
       </tr>
       </tbody>
     </table>
-    <button class="btn btn-danger" @click="sendOrder">Оформить заказ</button>
+    <button class="btn btn-danger" @click="handleActionBtn">Оформить заказ</button>
+    <div :class="{modalBackground: showModal}">
+      <div class="modal" :class="{'d-block' : showModal}" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Ваш заказ подготовлен</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="showModal = false">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Точно выбрали всё что надо? <br> Если да - введите ваш телефон, имя и нажмите "Оформить заказ"</p>
+              <input type="text" class="form-control" placeholder="Ваш телефон" v-model="phone">
+              <input type="text" class="form-control mt-2" placeholder="Ваше имя" v-model="name">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="showModal = false">Вернуться</button>
+              <button type="button" class="btn btn-danger" @click="sendOrder">Оформить заказ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { getNicePrice } from '@/utils'
 import { mapGetters, mapMutations } from 'vuex'
-import axios from 'axios'
+import { sendOrder } from '@/actions'
 
 export default {
+  data: () => ({
+    showModal: true,
+    phone: '',
+    name: ''
+  }),
   filters: {
     getNicePrice (price) {
       return getNicePrice(price)
@@ -70,13 +98,26 @@ export default {
     addAmount (operator, id) {
       this.addToOrder({ operator, id })
     },
-    sendOrder () {
-      axios.post('https://silkroad.na4u.ru', this.getOrder)
+    handleActionBtn () {
+      this.showModal = true
+    },
+    async sendOrder () {
+      const res = await sendOrder(this.getOrder)
+      if (res.data === 'OK') {
+        this.showModal = false
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-
+.modalBackground {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.62);
+}
 </style>
