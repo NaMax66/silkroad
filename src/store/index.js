@@ -32,7 +32,16 @@ export default new Vuex.Store({
     addToOrder (state, payload) {
       const el = state.order.find(el => el.id === payload.id)
       if (el) {
-        el.amount += payload
+        let extraAmount = el.packageAmount
+        if (payload.operator === 'minus') {
+          extraAmount *= -1
+        }
+        el.amount += extraAmount
+      } else {
+        /* если не находим элемент в заказах - берем его из прайса */
+        const newEl = Object.assign({}, state.priceList.list.find(el => el.id === payload.id))
+        newEl.amount = newEl.packageAmount
+        state.order.push(newEl)
       }
     }
   },
@@ -43,8 +52,8 @@ export default new Vuex.Store({
     changePrice ({ commit }, price) {
       commit('changePrice', price)
     },
-    addToOrder ({ commit }, amount) {
-      commit('addToOrder', amount)
+    addToOrder ({ commit }, payload) {
+      commit('addToOrder', payload)
     }
   },
   modules: {
