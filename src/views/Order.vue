@@ -20,7 +20,7 @@
         <th scope="col">
           <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-secondary btn-sm" @click="addAmount('minus', product)">-</button>
-            <button type="button" class="btn btn-secondary btn-sm disabled" aria-disabled="true">{{getAmount()}}</button>
+            <button type="button" class="btn btn-secondary btn-sm disabled" aria-disabled="true">{{getAmount(product)}}</button>
             <button type="button" class="btn btn-secondary btn-sm" @click="addAmount('plus', product)">+</button>
           </div>
         </th>
@@ -50,12 +50,16 @@ export default {
   methods: {
     ...mapMutations(['initPrice', 'addToOrder']),
     getProductPrice (product) {
-      const productInOrder = this.getOrder.find(el => el.name === product.name)
-      this.addToOrder(productInOrder)
-      return getNicePrice(10)
+      const productInOrder = this.getOrder.find(el => el.id === product.id)
+      let total = getNicePrice(0)
+      if (productInOrder) {
+        total = getNicePrice(productInOrder.price * productInOrder.amount)
+      }
+      return total
     },
-    getAmount () {
-      return this.number
+    getAmount (product) {
+      const productInOrder = this.getOrder.find(el => el.id === product.id)
+      return productInOrder && productInOrder.amount ? productInOrder.amount : 0
     },
     addAmount (operator, rate) {
       let total = rate
