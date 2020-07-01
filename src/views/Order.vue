@@ -7,7 +7,7 @@
         <th scope="col">Название</th>
         <th scope="col">Цена, шт.</th>
         <th scope="col">Мин. кол-во</th>
-        <th scope="col"></th>
+        <th scope="col">В заказе, шт</th>
         <th scope="col">Сумма</th>
       </tr>
       </thead>
@@ -32,12 +32,14 @@
       </tr>
       </tbody>
     </table>
+    <button class="btn btn-danger" @click="sendOrder">Оформить заказ</button>
   </div>
 </template>
 
 <script>
 import { getNicePrice } from '@/utils'
 import { mapGetters, mapMutations } from 'vuex'
+import axios from 'axios'
 
 export default {
   filters: {
@@ -67,6 +69,9 @@ export default {
     },
     addAmount (operator, id) {
       this.addToOrder({ operator, id })
+    },
+    sendOrder () {
+      axios.post('https://silkroad.na4u.ru', this.getOrder)
     }
   }
 }
