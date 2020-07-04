@@ -33,29 +33,48 @@
       </tbody>
     </table>
     <button class="btn btn-danger" @click="handleActionBtn">Оформить заказ</button>
-    <div :class="{modalBackground: showModal}">
-      <div class="modal" :class="{'d-block' : showModal}" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Ваш заказ подготовлен</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="showModal = false">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Точно выбрали всё что надо? <br> Если да - введите ваш телефон, имя и нажмите "Оформить заказ"</p>
-              <input type="text" class="form-control" placeholder="Ваш телефон" v-model="phone">
-              <input type="text" class="form-control mt-2" placeholder="Ваше имя" v-model="name">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="showModal = false">Вернуться</button>
-              <button type="button" class="btn btn-danger" @click="sendOrder">Оформить заказ</button>
+    <v-modal :is-modal-shown="isModalShown">
+          <div class="modal-header">
+            <h5 class="modal-title">Ваш заказ подготовлен</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="isModalShown = false">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Точно выбрали всё что надо? <br> Если да - введите имя и телефон. Нажмите "Оформить заказ"</p>
+            <input type="text" class="form-control" placeholder="Ваше имя" v-model="name">
+            <input type="text" class="form-control  mt-2" placeholder="Ваш телефон" v-model="phone">
+          </div>
+          <div v-if="!isFetching" class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="isModalShown = false">Вернуться</button>
+            <button type="button" class="btn btn-danger" @click="sendOrder">Оформить заказ</button>
+          </div>
+          <div class="text-center p-2">
+            <div  v-if="isFetching" class="spinner-border" role="status">
+              <span class="sr-only">Подождите...</span>
             </div>
           </div>
-        </div>
+    </v-modal>
+    <v-modal :is-modal-shown="isModalSuccessShown">
+      <div class="modal-body">
+        <h3>Ваш заказ отправлен!</h3>
+        <h3>Мы вам перезвоним</h3>
       </div>
-    </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" @click="makeNewOrder">Оформить новый заказ</button>
+      </div>
+    </v-modal>
+    <v-modal :is-modal-shown="isModalErrorShown">
+      <div class="modal-body">
+        <h3>Не удалось оформить заказ автоматически</h3>
+        <p>Свяжитесь с нами по телефону:</p>
+        <!--todo узнать телефон на всякйи случай-->
+        <h1>555-55-55</h1>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" @click="makeNewOrder">Оформить новый заказ</button>
+      </div>
+    </v-modal>
   </div>
 </template>
 
@@ -63,12 +82,19 @@
 import { getNicePrice } from '@/utils'
 import { mapGetters, mapMutations } from 'vuex'
 import { sendOrder } from '@/actions'
+import VModal from '@/components/VModal'
 
 export default {
+  components: {
+    VModal
+  },
   data: () => ({
-    showModal: true,
+    isModalShown: false,
+    isModalSuccessShown: false,
+    isModalErrorShown: false,
     phone: '',
-    name: ''
+    name: '',
+    isFetching: false
   }),
   filters: {
     getNicePrice (price) {
@@ -82,7 +108,7 @@ export default {
     this.initPrice()
   },
   methods: {
-    ...mapMutations(['initPrice', 'addToOrder']),
+    ...mapMutations(['initPrice', 'addToOrder', 'clearOrder']),
     getProductPrice (product) {
       const productInOrder = this.getOrder.find(el => el.id === product.id)
       let total = getNicePrice(0)
@@ -99,13 +125,42 @@ export default {
       this.addToOrder({ operator, id })
     },
     handleActionBtn () {
-      this.showModal = true
+      this.isModalShown = true
     },
     async sendOrder () {
-      const res = await sendOrder(this.getOrder)
-      if (res.data === 'OK') {
-        this.showModal = false
+      /* todo возвращать с сервера уникальный номер заказа. Показывать заказчику */
+      this.isFetching = true
+      const order = {
+        newOrder: this.getOrder,
+        name: this.name,
+        phone: this.phone,
+        total: this.getTotalOrderSum
       }
+      let res = {}
+      try {
+        res = await sendOrder(order)
+      } catch (e) {
+        console.log(e)
+        res.data = 'NO RESPONSE'
+      }
+      if (res.data === 'OK') {
+        this.showModalSuccess()
+      } else {
+        this.showModalError()
+      }
+      this.isModalShown = false
+      this.isFetching = false
+    },
+    showModalSuccess () {
+      this.isModalSuccessShown = true
+    },
+    showModalError () {
+      this.isModalErrorShown = true
+    },
+    makeNewOrder () {
+      this.isModalSuccessShown = false
+      /* очищаем объект заказ */
+      this.clearOrder()
     }
   }
 }

@@ -16,11 +16,15 @@ export default new Vuex.Store({
       return state.priceList
     },
     getOrder (state) {
+      /* получаем общую сумму по каждому товару и записываем в объект */
+      state.order.forEach(el => {
+        el.totalSum = el.amount * el.price
+      })
       return state.order
     },
     getTotalOrderSum (state) {
       return state.order.length ? state.order.reduce((acc, el) => {
-        acc += el.amount
+        acc += el.amount * el.price
         return acc
       }, 0) : 0
     }
@@ -54,6 +58,9 @@ export default new Vuex.Store({
         newEl.amount = newEl.packageAmount
         state.order.push(newEl)
       }
+    },
+    clearOrder (state) {
+      state.order = []
     }
   },
   actions: {
@@ -65,6 +72,9 @@ export default new Vuex.Store({
     },
     addToOrder ({ commit }, payload) {
       commit('addToOrder', payload)
+    },
+    clearOrder ({ commit }) {
+      commit('clearOrder')
     }
   },
   modules: {
