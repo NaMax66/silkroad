@@ -21,7 +21,7 @@
         <th scope="col">
           <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-secondary btn-sm" @click="addAmount('minus', product.id)">-</button>
-            <button type="button" class="btn btn-secondary btn-sm disabled" aria-disabled="true">{{getAmount(product)}}</button>
+            <button type="button" style="min-width: 40px" class="btn btn-secondary btn-sm disabled" aria-disabled="true">{{getAmount(product)}}</button>
             <button type="button" class="btn btn-secondary btn-sm" @click="addAmount('plus', product.id)">+</button>
           </div>
         </th>
@@ -33,6 +33,10 @@
       </tr>
       </tbody>
     </table>
+    <!--todo ограничить число символов, сделать проверку-->
+    <div>
+      <textarea class="mt-2 w-100" placeholder="Комментарии к заказу(не обязательно)" v-model="comment" rows="2"></textarea>
+    </div>
     <button class="btn btn-danger" @click="handleActionBtn">Оформить заказ</button>
     <v-modal :is-modal-shown="isModalShown">
           <div class="modal-header">
@@ -95,6 +99,7 @@ export default {
     isModalErrorShown: false,
     phone: '',
     name: '',
+    comment: '',
     isFetching: false,
     isOperatorPhoneShown: false,
     operatorPhone: '555-55-55'
@@ -137,6 +142,7 @@ export default {
         newOrder: this.getOrder,
         name: this.name,
         phone: this.phone,
+        comment: this.comment.substring(0, 3000),
         total: this.getTotalOrderSum
       }
       let res = {}
