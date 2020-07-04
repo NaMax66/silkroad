@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <h1 class="text-danger mb-5" v-if="isOperatorPhoneShown">Свяжитесь с нами по телефону: <br> {{operatorPhone}}</h1>
     <table class="table table-sm table-striped">
       <thead>
       <tr>
@@ -69,10 +70,10 @@
         <h3>Не удалось оформить заказ автоматически</h3>
         <p>Свяжитесь с нами по телефону:</p>
         <!--todo узнать телефон на всякйи случай-->
-        <h1>555-55-55</h1>
+        <h1>{{operatorPhone}}</h1>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-danger" @click="makeNewOrder">Оформить новый заказ</button>
+        <button class="btn btn-danger" @click="closeModalError">Оформить новый заказ</button>
       </div>
     </v-modal>
   </div>
@@ -94,7 +95,9 @@ export default {
     isModalErrorShown: false,
     phone: '',
     name: '',
-    isFetching: false
+    isFetching: false,
+    isOperatorPhoneShown: false,
+    operatorPhone: '555-55-55'
   }),
   filters: {
     getNicePrice (price) {
@@ -161,6 +164,10 @@ export default {
       this.isModalSuccessShown = false
       /* очищаем объект заказ */
       this.clearOrder()
+    },
+    closeModalError () {
+      this.isModalErrorShown = false
+      this.isOperatorPhoneShown = true
     }
   }
 }
