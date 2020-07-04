@@ -6,13 +6,19 @@
       </div>
       <button @click.prevent="checkPass" class="btn btn-danger">Войти</button>
     </form>
+    <v-table v-if="authorized" :columns="tableColumns" />
   </div>
 </template>
 <script>
+import VTable from '@/components/VTable'
 export default {
   name: 'Admin',
+  components: {
+    VTable
+  },
   data: () => ({
-    authorized: false
+    authorized: false,
+    tableColumns: ['№', 'Название', 'Цена, шт', 'Мин. кол-во']
   }),
   methods: {
     checkPass () {
