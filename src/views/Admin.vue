@@ -17,7 +17,8 @@ export default {
     VTable
   },
   data: () => ({
-    authorized: false,
+    password: '',
+    authorized: true,
     tableColumns: ['№', 'Название', 'Цена, шт', 'Мин. кол-во']
   }),
   methods: {

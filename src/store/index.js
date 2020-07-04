@@ -9,11 +9,21 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     priceList: null,
+    newPriceList: null,
     order: []
   },
   getters: {
     getPrice (state) {
       return state.priceList
+    },
+    getNewPrice (state) {
+      let list = {}
+      if (state.newPriceList) {
+        list = state.newPriceList
+      } else {
+        list = JSON.parse(JSON.stringify(state.priceList))
+      }
+      return list
     },
     getOrder (state) {
       /* получаем общую сумму по каждому товару и записываем в объект */
@@ -61,6 +71,9 @@ export default new Vuex.Store({
     },
     clearOrder (state) {
       state.order = []
+    },
+    saveToLocal (state, payload) {
+      state.newPriceList = payload
     }
   },
   actions: {
@@ -75,6 +88,9 @@ export default new Vuex.Store({
     },
     clearOrder ({ commit }) {
       commit('clearOrder')
+    },
+    saveToLocal ({ commit }, payload) {
+      commit('saveToLocal', payload)
     }
   },
   modules: {
