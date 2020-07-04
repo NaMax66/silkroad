@@ -1,10 +1,18 @@
 import axios from 'axios'
 
-export const sendOrder = (order) => {
-  let url = 'https://silkroad.na4u.ru/api/new_order'
+function getUrl (action) {
+  let url = 'https://silkroad.na4u.ru/api/'
 
   if (process.env.NODE_ENV === 'development') {
-    url = 'http://localhost:5000/api/new_order'
+    url = 'http://localhost:5000/api/'
   }
-  return axios.post(url, order)
+  return url + action
+}
+
+export const sendOrder = (order) => {
+  return axios.post(getUrl('new_order'), order)
+}
+
+export const changePrice = (newPrice) => {
+  return axios.post(getUrl('change_price'), newPrice)
 }
