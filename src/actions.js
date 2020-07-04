@@ -14,5 +14,11 @@ export const sendOrder = (order) => {
 }
 
 export const changePrice = (newPrice) => {
+  console.log('changePrice')
   return axios.post(getUrl('change_price'), newPrice)
+}
+
+export const getPrice = () => {
+  console.log('getPrice')
+  return axios.get(getUrl('get_price'))
 }

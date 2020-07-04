@@ -20,6 +20,19 @@
         <input class="w-100 border-0 bg-transparent" type="text" v-model="product.packageAmount" @input="handleInput">
       </td>
     </tr>
+    <tr>
+      <td>new</td>
+      <td>
+        <input class="w-100 border-0 bg-transparent" type="text" v-model="newProduct.name" @input="handleInput">
+      </td>
+      <td class="v-table_price">
+        <input class="w-100 border-0 bg-transparent" type="text" v-model="newProduct.price" @input="handleInput">
+      </td>
+      <td class="v-table_pack">
+        <input class="w-100 border-0 bg-transparent" type="text" v-model="newProduct.packageAmount" @input="handleInput">
+      </td>
+      <td><button class="btn btn-success btn-sm" @click="handleAdd">+</button></td>
+    </tr>
     </tbody>
   </table>
 </template>
@@ -30,7 +43,13 @@ import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'VTable',
   data: () => ({
-    productList: []
+    productList: [],
+    newProduct: {
+      id: null,
+      name: '',
+      price: 0,
+      packageAmount: 0
+    }
   }),
   props: {
     columns: {
@@ -41,14 +60,19 @@ export default {
   computed: {
     ...mapGetters(['getNewPrice'])
   },
-  created () {
-    this.initPrice()
+  async created () {
+    await this.initPrice()
     this.productList = this.getNewPrice
   },
   methods: {
-    ...mapMutations(['initPrice', 'saveToLocal']),
+    ...mapMutations(['initPrice', 'saveToLocal', 'addNewProduct']),
     handleInput () {
       this.saveToLocal(this.productList)
+    },
+    handleAdd () {
+      const product = Object.assign({}, this.newProduct)
+      console.log(product === this.newProduct)
+      // this.addNewProduct(product)
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="text-danger mb-5" v-if="isOperatorPhoneShown">Свяжитесь с нами по телефону: <br> {{operatorPhone}}</h1>
-    <table class="table table-sm table-striped">
+    <table class="table table-sm table-striped" v-if="getPrice">
       <thead>
       <tr>
         <th scope="col">№</th>
@@ -112,8 +112,8 @@ export default {
   computed: {
     ...mapGetters(['getPrice', 'getOrder', 'getTotalOrderSum'])
   },
-  created () {
-    this.initPrice()
+  async created () {
+    await this.initPrice()
   },
   methods: {
     ...mapMutations(['initPrice', 'addToOrder', 'clearOrder']),

@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import priceExample from '@/priceExample'
-
-const env = process.env.NODE_ENV
+// import priceExample from '@/priceExample'
+import { getPrice } from '@/actions'
 
 Vue.use(Vuex)
 
@@ -17,6 +16,9 @@ export default new Vuex.Store({
       return state.priceList
     },
     getNewPrice (state) {
+      if (!state.priceList) {
+        return
+      }
       let list = {}
       if (state.newPriceList) {
         list = state.newPriceList
@@ -41,12 +43,8 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    initPrice (state) {
-      let price = {}
-      if (env === 'development') {
-        price = priceExample
-      }
-      state.priceList = price
+    async initPrice (state, payload) {
+      state.priceList = payload
     },
     changePrice (state, payload) {
       state.priceList = payload
@@ -75,11 +73,15 @@ export default new Vuex.Store({
     },
     saveToLocal (state, payload) {
       state.newPriceList = payload
+    },
+    addNewProduct (state, payload) {
+      state.newPriceList.list.push(payload)
     }
   },
   actions: {
-    initPrice ({ commit }) {
-      commit('initPrice')
+    async initPrice ({ commit }) {
+      const price = await getPrice()
+      commit('initPrice', price)
     },
     changePrice ({ commit }, price) {
       commit('changePrice', price)
@@ -92,6 +94,9 @@ export default new Vuex.Store({
     },
     saveToLocal ({ commit }, payload) {
       commit('saveToLocal', payload)
+    },
+    addNewProduct ({ commit }, payload) {
+      commit('addNewProduct', payload)
     }
   },
   modules: {
