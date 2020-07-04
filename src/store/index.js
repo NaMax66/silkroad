@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import priceExample from '@/priceExample'
+import priceExample from '@/priceExample'
 import { getPrice } from '@/actions'
+import { v4 as uuidv4 } from 'uuid'
 
 Vue.use(Vuex)
 
@@ -75,13 +76,24 @@ export default new Vuex.Store({
       state.newPriceList = payload
     },
     addNewProduct (state, payload) {
+      payload.id = uuidv4()
+      if (!state.newPriceList) {
+        state.newPriceList.list = []
+      }
       state.newPriceList.list.push(payload)
     }
   },
   actions: {
     async initPrice ({ commit }) {
-      const price = await getPrice()
-      commit('initPrice', price)
+      let { data } = await getPrice()
+      if (!data.list) {
+        data = priceExample
+      }
+      data.list.forEach(el => {
+        el.packageAmount = +el.packageAmount
+        el.price = +el.price
+      })
+      commit('initPrice', data)
     },
     changePrice ({ commit }, price) {
       commit('changePrice', price)

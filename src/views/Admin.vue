@@ -14,7 +14,7 @@
 <script>
 import VTable from '@/components/VTable'
 import { changePrice } from '@/actions'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Admin',
   components: {
@@ -28,7 +28,11 @@ export default {
   computed: {
     ...mapGetters(['getNewPrice'])
   },
+  async created () {
+    await this.initPrice()
+  },
   methods: {
+    ...mapActions(['initPrice']),
     checkPass () {
       if (this.password === 'salam') {
         this.authorized = true

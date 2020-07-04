@@ -85,7 +85,7 @@
 
 <script>
 import { getNicePrice } from '@/utils'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { sendOrder } from '@/actions'
 import VModal from '@/components/VModal'
 
@@ -116,7 +116,7 @@ export default {
     await this.initPrice()
   },
   methods: {
-    ...mapMutations(['initPrice', 'addToOrder', 'clearOrder']),
+    ...mapActions(['initPrice', 'addToOrder', 'clearOrder']),
     getProductPrice (product) {
       const productInOrder = this.getOrder.find(el => el.id === product.id)
       let total = getNicePrice(0)
