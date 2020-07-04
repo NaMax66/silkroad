@@ -7,10 +7,13 @@
       <button @click.prevent="checkPass" class="btn btn-danger">Войти</button>
     </form>
     <v-table v-if="authorized" :columns="tableColumns" />
+    <button class="btn btn-success mt-2" @click="sendToServer">Сохранить список на сервере</button>
   </div>
 </template>
 <script>
 import VTable from '@/components/VTable'
+import { changePrice } from '@/actions'
+import { mapGetters } from 'vuex'
 export default {
   name: 'Admin',
   components: {
@@ -21,11 +24,17 @@ export default {
     authorized: true,
     tableColumns: ['№', 'Название', 'Цена, шт', 'Мин. кол-во']
   }),
+  computed: {
+    ...mapGetters(['getNewPrice'])
+  },
   methods: {
     checkPass () {
       if (this.password === 'salam') {
         this.authorized = true
       }
+    },
+    sendToServer () {
+      changePrice(this.getNewPrice)
     }
   }
 }

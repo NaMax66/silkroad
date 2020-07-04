@@ -21,6 +21,7 @@ export default new Vuex.Store({
       if (state.newPriceList) {
         list = state.newPriceList
       } else {
+        /* делаем копию нового заказа из того, что есть на сервере. */
         list = JSON.parse(JSON.stringify(state.priceList))
       }
       return list
