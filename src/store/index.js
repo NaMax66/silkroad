@@ -10,7 +10,8 @@ export default new Vuex.Store({
   state: {
     priceList: null,
     newPriceList: null,
-    order: []
+    order: [],
+    newOrders: null
   },
   getters: {
     getPrice (state) {
@@ -41,9 +42,15 @@ export default new Vuex.Store({
         acc += el.amount * el.price
         return acc
       }, 0) : 0
+    },
+    getNewOrders (state) {
+      return state.newOrders
     }
   },
   mutations: {
+    SOCKET_newOrder (state, message) {
+      state.newOrders = message
+    },
     async initPrice (state, payload) {
       state.priceList = payload
       if (!state.newPriceList) {

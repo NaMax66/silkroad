@@ -145,7 +145,8 @@ export default {
         name: this.name,
         phone: this.phone,
         comment: this.comment.substring(0, 3000),
-        total: this.getTotalOrderSum
+        total: this.getTotalOrderSum,
+        time: new Date().toLocaleString()
       }
       let res = {}
       try {

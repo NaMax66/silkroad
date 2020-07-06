@@ -12,6 +12,9 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/admin">Админ</router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/new_orders">Новые заказы</router-link>
+          </li>
         </ul>
       </div>
     </div>
