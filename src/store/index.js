@@ -46,6 +46,9 @@ export default new Vuex.Store({
   mutations: {
     async initPrice (state, payload) {
       state.priceList = payload
+      if (!state.newPriceList) {
+        state.newPriceList = JSON.parse(JSON.stringify(payload))
+      }
     },
     changePrice (state, payload) {
       state.priceList = payload
@@ -81,6 +84,9 @@ export default new Vuex.Store({
         state.newPriceList.list = []
       }
       state.newPriceList.list.push(payload)
+    },
+    removeItemById (state, id) {
+      state.newPriceList.list = state.newPriceList.list.filter(el => el.id !== id)
     }
   },
   actions: {
@@ -109,6 +115,9 @@ export default new Vuex.Store({
     },
     addNewProduct ({ commit }, payload) {
       commit('addNewProduct', payload)
+    },
+    removeItemById ({ commit }, id) {
+      commit('removeItemById', id)
     }
   },
   modules: {

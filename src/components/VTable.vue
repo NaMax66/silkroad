@@ -25,6 +25,7 @@
         <td class="v-table_pack">
           <input class="w-100 border-0 bg-transparent" type="text" v-model="product.packageAmount" @input="handleInput">
         </td>
+        <td><button class="btn btn-danger btn-sm" @click="removeItemById(product.id)">&times;</button></td>
       </tr>
       <tr>
         <td>new</td>
@@ -79,7 +80,7 @@ export default {
     this.isFetching = false
   },
   methods: {
-    ...mapMutations(['initPrice', 'saveToLocal', 'addNewProduct']),
+    ...mapMutations(['initPrice', 'saveToLocal', 'addNewProduct', 'removeItemById']),
     handleInput () {
       this.saveToLocal(this.productList)
     },
