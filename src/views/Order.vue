@@ -88,6 +88,7 @@ import { getNicePrice } from '@/utils'
 import { mapGetters, mapActions } from 'vuex'
 import { sendOrder } from '@/actions'
 import VModal from '@/components/VModal'
+import { v4 as uuidv4 } from 'uuid'
 
 export default {
   components: {
@@ -139,6 +140,7 @@ export default {
       /* todo возвращать с сервера уникальный номер заказа. Показывать заказчику */
       this.isFetching = true
       const order = {
+        id: uuidv4(),
         newOrder: this.getOrder,
         name: this.name,
         phone: this.phone,
