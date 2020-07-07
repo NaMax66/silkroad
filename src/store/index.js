@@ -11,7 +11,8 @@ export default new Vuex.Store({
     priceList: null,
     newPriceList: null,
     order: [],
-    newOrders: null
+    newOrders: null,
+    isAdmin: false
   },
   getters: {
     getPrice (state) {
@@ -45,11 +46,17 @@ export default new Vuex.Store({
     },
     getNewOrders (state) {
       return state.newOrders
+    },
+    getIsAdmin (state) {
+      return state.isAdmin
     }
   },
   mutations: {
     SOCKET_newOrder (state, message) {
       state.newOrders = message
+    },
+    setAdmin (state) {
+      state.isAdmin = true
     },
     async initPrice (state, payload) {
       state.priceList = payload
@@ -125,6 +132,9 @@ export default new Vuex.Store({
     },
     removeItemById ({ commit }, id) {
       commit('removeItemById', id)
+    },
+    setAdmin ({ commit }) {
+      commit('setAdmin')
     }
   },
   modules: {
