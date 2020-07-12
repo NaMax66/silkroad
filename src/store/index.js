@@ -38,7 +38,7 @@ export default new Vuex.Store({
     },
     getTotalOrderSum (state) {
       return state.order.length ? state.order.reduce((acc, el) => {
-        acc += el.amount * el.price
+        acc += +el.amount * +el.price
         return acc
       }, 0) : 0
     },
@@ -50,7 +50,7 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    SOCKET_newOrder (state, message) {
+    SOCKET_newOrderFromServer (state, message) {
       state.newOrders = message
     },
     SOCKET_initialPrice (state, message) {

@@ -2,28 +2,16 @@
   "category": "Пакеты и Бытовые принадлежности",
   "list": [
     {
-      "id": "1",
+      "id": "cf7d9892-f141-4a8d-a1b7-073cca71c366",
       "name": "Фарш",
-      "price": 100,
+      "price": 12,
       "packageAmount": 100
     },
     {
-      "id": "2e6f7bd4-eabe-47a2-b35e-e500f1cffcbd",
-      "name": "Котлеты",
-      "price": 221,
+      "id": "4f43b2d3-80c0-4f31-8640-d78222567190",
+      "name": "Молоко",
+      "price": 100,
       "packageAmount": 12
-    },
-    {
-      "id": "0d5f6313-3ed6-4a53-aaa7-034bbb372813",
-      "name": "Мешки",
-      "price": "10",
-      "packageAmount": "30"
-    },
-    {
-      "id": "4cf15678-4d16-489f-baa6-b4f8c4c06d7e",
-      "name": "Туфли",
-      "price": "12",
-      "packageAmount": "22"
     }
   ]
 }

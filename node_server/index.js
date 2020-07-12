@@ -3,7 +3,6 @@ const fs = require('fs')
 const express = require('express')
 const bodyParser = require('body-parser')
 const history = require('connect-history-api-fallback')
-const priceExample = require('./priceExample')
 const app = express()
 
 app.use(bodyParser.json())
@@ -22,39 +21,26 @@ const io = require('socket.io')(http)
 
 /* App logic here */
 
-const initCash = function (filePath) {
-  let data = priceExample
+const initCash = function (dbName) {
+  let filePath = `./${dbName}.json`
+  let data
   try {
     data = fs.readFileSync(filePath, 'utf8')
   } catch (e) {
     // if no file - create one
+    filePath = `./${dbName}_example.json`
     fs.writeFileSync(filePath, data, 'utf8')
   }
-  return data
+  return JSON.parse(data)
 }
 
 /* cash variables */
 let orders, price
 // eslint-disable-next-line prefer-const
-orders = initCash('./orders.json')
-price = initCash('./price.json')
+orders = initCash('orders')
+price = initCash('price')
 
-app.post('/api/new_order', (req, res) => {
-  orders[req.body.id] = req.body
-  fs.writeFileSync('./orders.json', JSON.stringify(orders, null, 2), 'utf-8')
-  hasNewOrder = true
-  res.send('OK')
-})
-
-let hasNewOrder = false
 io.sockets.on('connection', function (socket) {
-  setInterval(() => {
-    if (hasNewOrder) {
-      socket.emit('newOrder', orders)
-      hasNewOrder = false
-    }
-  }, 10000)
-
   socket.on('getPrice', (data, cb) => {
     socket.emit('initialPrice', price)
     const msg = 'ok'
@@ -69,7 +55,15 @@ io.sockets.on('connection', function (socket) {
   })
 
   socket.on('getNewOrders', () => {
-    socket.emit('newOrder', orders)
+    socket.emit('newOrderFromServer', orders)
+  })
+  socket.on('newOrderFromClient', (data, cb) => {
+    orders[data.id] = data
+    fs.writeFileSync('./orders.json', JSON.stringify(orders, null, 2), 'utf-8')
+    /* Обновляем список новых заказов у админа */
+    socket.emit('newOrderFromServer', orders)
+    const msg = 'ok'
+    return cb(msg)
   })
 })
 

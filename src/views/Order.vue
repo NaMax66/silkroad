@@ -87,7 +87,7 @@
 import { getNicePrice } from '@/utils'
 import { mapGetters, mapActions } from 'vuex'
 import VModal from '@/components/VModal'
-// import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 
 export default {
   components: {
@@ -138,7 +138,7 @@ export default {
     async sendOrder () {
       /* todo возвращать с сервера уникальный номер заказа. Показывать заказчику */
       this.isFetching = true
-      /*  const order = {
+      const order = {
         id: uuidv4(),
         newOrder: this.getOrder,
         name: this.name,
@@ -147,20 +147,15 @@ export default {
         total: this.getTotalOrderSum,
         time: new Date().toLocaleString()
       }
-      let res = {}
-      try {
-        res = await sendOrder(order)
-      } catch (e) {
-        console.log(e)
-        res.data = 'NO RESPONSE'
-      }
-      if (res.data === 'OK') {
-        this.showModalSuccess()
-      } else {
-        this.showModalError()
-      }
+      this.$socket.emit('newOrderFromClient', order, (msg) => {
+        if (msg === 'ok') {
+          this.showModalSuccess()
+        } else {
+          this.showModalError()
+        }
+      })
       this.isModalShown = false
-      this.isFetching = false */
+      this.isFetching = false
     },
     showModalSuccess () {
       this.isModalSuccessShown = true

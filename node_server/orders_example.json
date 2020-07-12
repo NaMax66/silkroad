@@ -1,0 +1,20 @@
+{
+  "12865750-a7f2-49f8-8f0e-7bef778d2add": {
+    "id": "12865750-a7f2-49f8-8f0e-7bef778d2add",
+    "newOrder": [
+      {
+        "id": "1",
+        "name": "Test",
+        "price": 100,
+        "packageAmount": 100,
+        "amount": 100,
+        "totalSum": 10000
+      }
+    ],
+    "name": "Admin",
+    "phone": "123",
+    "comment": "",
+    "total": 0,
+    "time": "12.07.1970, 12:44:25"
+  }
+}

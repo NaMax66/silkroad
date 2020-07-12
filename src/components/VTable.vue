@@ -20,23 +20,23 @@
           <input class="w-100 border-0 bg-transparent" type="text" v-model="product.name" @input="handleInput">
         </td>
         <td class="v-table_price">
-          <input class="w-100 border-0 bg-transparent" type="text" v-model="product.price" @input="handleInput">
+          <input class="w-100 border-0 bg-transparent" type="number" v-model="product.price" @input="handleInput">
         </td>
         <td class="v-table_pack">
-          <input class="w-100 border-0 bg-transparent" type="text" v-model="product.packageAmount" @input="handleInput">
+          <input class="w-100 border-0 bg-transparent" type="number" v-model="product.packageAmount" @input="handleInput">
         </td>
         <td><button class="btn btn-danger btn-sm" @click="removeItemById(product.id)">&times;</button></td>
       </tr>
       <tr>
-        <td>new</td>
+        <td>*</td>
         <td>
           <input class="w-100 border-0 bg-transparent" type="text" v-model="newProduct.name" @input="handleInput">
         </td>
         <td class="v-table_price">
-          <input class="w-100 border-0 bg-transparent" type="text" v-model="newProduct.price" @input="handleInput">
+          <input class="w-100 border-0 bg-transparent" type="number" v-model="newProduct.price" @input="handleInput">
         </td>
         <td class="v-table_pack">
-          <input class="w-100 border-0 bg-transparent" type="text" v-model="newProduct.packageAmount" @input="handleInput">
+          <input class="w-100 border-0 bg-transparent" type="number" v-model="newProduct.packageAmount" @input="handleInput">
         </td>
         <td><button class="btn btn-success btn-sm" @click="handleAdd">+</button></td>
       </tr>
@@ -86,6 +86,8 @@ export default {
       this.productList = this.getNewPrice
     },
     handleAdd () {
+      this.newProduct.price = +this.newProduct.price
+      this.newProduct.packageAmount = +this.newProduct.packageAmount
       const product = Object.assign({}, this.newProduct)
       this.newProduct = {
         id: null,
