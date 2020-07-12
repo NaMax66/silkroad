@@ -80,6 +80,7 @@ export default {
   methods: {
     ...mapMutations(['saveToLocal', 'addNewProduct', 'removeItemById']),
     handleInput () {
+      this.$emit('dataChanged')
       this.saveToLocal(this.productList)
     },
     setList () {

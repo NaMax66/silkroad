@@ -6,7 +6,8 @@
       </div>
       <button @click.prevent="checkPass" class="btn btn-danger">Войти</button>
     </form>
-    <v-table ref="table" v-if="getIsAdmin" :columns="tableColumns" @save="sendToServer"/>
+    <v-table ref="table" v-if="getIsAdmin" :columns="tableColumns" @save="sendToServer" @dataChanged="isActionBtnActive = true"/>
+    <button :class="{'btn-danger': isActionBtnActive, 'btn-light': !isActionBtnActive}" class="btn fixed-bottom mb-2 ml-2" @click="sendToServer">Сохранить</button>
   </div>
 </template>
 <script>
@@ -19,7 +20,8 @@ export default {
   },
   data: () => ({
     password: '',
-    tableColumns: ['№', 'Название', 'Цена, шт', 'Мин. кол-во']
+    tableColumns: ['№', 'Название', 'Цена, шт', 'Мин. кол-во'],
+    isActionBtnActive: false
   }),
   computed: {
     ...mapGetters(['getNewPrice', 'getIsAdmin'])
@@ -32,6 +34,7 @@ export default {
       }
     },
     sendToServer () {
+      this.isActionBtnActive = false
       this.$socket.emit('updatePrice', this.getNewPrice, msg => {
         console.log(msg)
       })

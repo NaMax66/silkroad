@@ -7,11 +7,12 @@ import router from './router'
 import store from './store'
 import './main.css'
 import VueSocketIO from 'vue-socket.io'
+import { getUrl } from '@/utils'
 
 Vue.config.productionTip = false
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: 'http://localhost:8000',
+  connection: getUrl(),
   vuex: {
     store,
     actionPrefix: 'SOCKET_',

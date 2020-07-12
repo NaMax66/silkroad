@@ -67,7 +67,7 @@ io.sockets.on('connection', function (socket) {
     return cb(msg)
   })
   socket.on('removeOrder', (id, cb) => {
-    delete orders[id]
+    orders = orders.filter(el => el.id !== id)
     fs.writeFileSync('./orders.json', JSON.stringify(orders, null, 2), 'utf-8')
     socket.emit('newOrderFromServer', orders)
     const msg = 'ok'

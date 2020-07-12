@@ -1,42 +1,6 @@
 [
   {
-    "id": "c23a12d3-df42-4ba0-aeff-6db02324dd0e",
-    "newOrder": [
-      {
-        "id": "cf7d9892-f141-4a8d-a1b7-073cca71c366",
-        "name": "Фарш",
-        "price": 12,
-        "packageAmount": 100,
-        "amount": 400,
-        "totalSum": 4800
-      }
-    ],
-    "name": "ddd",
-    "phone": "",
-    "comment": "",
-    "total": 4800,
-    "time": "12.07.2020, 19:09:19"
-  },
-  {
-    "id": "2dc7e5d9-52f1-46e8-90e0-852b2f4f6f49",
-    "newOrder": [
-      {
-        "id": "4f43b2d3-80c0-4f31-8640-d78222567190",
-        "name": "Молоко",
-        "price": 100,
-        "packageAmount": 12,
-        "amount": 12,
-        "totalSum": 1200
-      }
-    ],
-    "name": "sdf",
-    "phone": "",
-    "comment": "",
-    "total": 1200,
-    "time": "12.07.2020, 19:06:14"
-  },
-  {
-    "id": "ef2f499d-f1c7-4c3d-ba89-1dd03c948c96",
+    "id": "b22219fc-7a40-4bcd-8913-a75e42b7ad76",
     "newOrder": [
       {
         "id": "cf7d9892-f141-4a8d-a1b7-073cca71c366",
@@ -47,18 +11,42 @@
         "totalSum": 3600
       },
       {
+        "id": "4f43b2d3-80c0-4f31-8640-d78222567190",
+        "name": "Молоко",
+        "price": 100,
+        "packageAmount": 12,
+        "amount": 24,
+        "totalSum": 2400
+      },
+      {
         "id": "2e850159-bd94-4aa5-804c-0a87930e3b23",
         "name": "Конфеты",
         "price": 10,
         "packageAmount": 4,
-        "amount": 8,
-        "totalSum": 80
+        "amount": 12,
+        "totalSum": 120
+      },
+      {
+        "id": "46296fee-32a1-4b64-af6e-83146d0c52ee",
+        "name": "Жвачка",
+        "price": 10,
+        "packageAmount": 10,
+        "amount": 30,
+        "totalSum": 300
+      },
+      {
+        "id": "41123d58-83ea-4399-9977-4015c08e5f82",
+        "name": "Фрукты",
+        "price": 22,
+        "packageAmount": 2,
+        "amount": 10,
+        "totalSum": 220
       }
     ],
-    "name": "ыва",
-    "phone": "вв",
-    "comment": "Хочу всё и сразу",
-    "total": 3680,
-    "time": "12.07.2020, 19:06:40"
+    "name": "Максим",
+    "phone": "113123",
+    "comment": "",
+    "total": 6640,
+    "time": "12.07.2020, 22:58:50"
   }
 ]

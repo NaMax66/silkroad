@@ -48,7 +48,7 @@
           <div class="modal-body">
             <p>Точно выбрали всё что надо? <br> Если да - введите имя и телефон. Нажмите "Оформить заказ"</p>
             <input type="text" class="form-control" placeholder="Ваше имя" v-model="name">
-            <input type="text" class="form-control  mt-2" placeholder="Ваш телефон" v-model="phone">
+            <input type="number" class="form-control  mt-2" placeholder="Ваш телефон" v-model="phone">
           </div>
           <div v-if="!isFetching" class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="isModalShown = false">Вернуться</button>
