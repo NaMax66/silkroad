@@ -4,7 +4,7 @@ function getUrl (action) {
   let url = 'https://silkroad.na4u.ru/api/'
 
   if (process.env.NODE_ENV === 'development') {
-    url = 'http://localhost:5000/api/'
+    url = 'http://localhost:8000/api/'
   }
   return url + action
 }

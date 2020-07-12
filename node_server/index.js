@@ -1,84 +1,78 @@
-const path = require("path");
-const fs = require("fs");
-const express = require("express");
-const bodyParser = require("body-parser");
-const io = require('socket.io').listen(8000);
-// const cors = require('cors')
+const path = require('path')
+const fs = require('fs')
+const express = require('express')
+const bodyParser = require('body-parser')
+const history = require('connect-history-api-fallback')
+const app = express()
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(history())
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(async (req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE')
+  res.setHeader('Access-Control-Allow-Headers', 'origin, X-Requested-With, Content-Type, Accept, Authorization')
+  next()
+})
+
+const http = require('http').createServer(app)
+const io = require('socket.io')(http)
+
+/* App logic here */
+
+const initCash = function (filePath) {
+  let data = {}
+  try {
+    data = fs.readFileSync(filePath, 'utf8')
+  } catch (e) {
+    // if no file - create one
+    fs.writeFileSync(filePath, data, 'utf8')
+  }
+  return data
+}
+
+/* cash variables */
+let orders, price
+// eslint-disable-next-line prefer-const
+orders = initCash('./orders.json')
+price = initCash('./price.json')
+
+app.post('/api/new_order', (req, res) => {
+  orders[req.body.id] = req.body
+  fs.writeFileSync('./orders.json', JSON.stringify(orders, null, 2), 'utf-8')
+  hasNewOrder = true
+  res.send('OK')
+})
+
+app.post('/api/change_price', (req, res) => {
+  price = req.body
+  fs.writeFileSync('./price.json', JSON.stringify(req.body, null, 2), 'utf-8')
+  res.send('OK')
+})
+
+app.get('/api/get_price', (req, res) => {
+  res.send(price)
+})
 
 let hasNewOrder = false
-io.set('log level', 1);
-// Навешиваем обработчик на подключение нового клиента
-/* https://habr.com/ru/post/127525/ */
 io.sockets.on('connection', function (socket) {
-  // Т.к. чат простой - в качестве ников пока используем первые 5 символов от ID сокета
-  const ID = (socket.id).toString().substr(0, 5);
-  setInterval(()=> {
+  setInterval(() => {
     if (hasNewOrder) {
-      const orders = JSON.parse(fs.readFileSync('./orders.json', 'utf8'))
       socket.emit('newOrder', orders)
       hasNewOrder = false
     }
   }, 10000)
 
-  socket.on('getNewOrders', () => {
-    const orders = JSON.parse(fs.readFileSync('./orders.json', 'utf8'))
-    socket.emit('newOrder', orders)
+  socket.on('getPrice', () => {
+    socket.emit(price)
   })
 
-  // При отключении клиента - уведомляем остальных
+  socket.on('getNewOrders', () => {
+    socket.emit('newOrder', orders)
+  })
+})
 
-
-  socket.on('disconnect', function() {
-    const time = (new Date).toLocaleTimeString();
-    io.sockets.json.send({'event': 'userSplit', 'name': ID, 'time': time});
-  });
-});
-
-const app = express();
-// app.use(cors())
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-
-//reloading in a route
-const history = require('connect-history-api-fallback');
-
-const book_database = require("./book_database.json");
-
-app.use(history());
-app.use(express.static(path.join(__dirname, "public")));
-app.use(async (req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "origin, X-Requested-With, Content-Type, Accept, Authorization");
-  next();
-});
-/*app.get("/book_database", (req, res) => {
-    res.send(book_database);
-});*/
-/*app.use("*", function(req, res) {
-    res.status(404).send("404");
-});*/
-
-app.post("/api/new_order", (req, res) => {
-  const orders = JSON.parse(fs.readFileSync('./orders.json', 'utf8'))
-  orders[req.body.id] = req.body
-  fs.writeFileSync('./orders.json', JSON.stringify(orders) , 'utf-8')
-  hasNewOrder = true
-  res.send('OK')
-});
-
-app.post("/api/change_price", (req, res) => {
-  fs.writeFileSync('./price.json', JSON.stringify(req.body) , 'utf-8')
-  res.send('OK')
-});
-
-app.get("/api/get_price", (req, res) => {
-  const price = fs.readFileSync('./price.json', 'utf8')
-  res.send(JSON.parse(price))
-});
-
-app.listen(5000, "localhost", () => {
-    console.log(`Server running at http://localhost:8000/` + "\n");
-});
-
-
+http.listen(8000, () => {
+  console.log('listening on *:8000')
+})
