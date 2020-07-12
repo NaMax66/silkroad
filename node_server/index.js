@@ -59,7 +59,7 @@ io.sockets.on('connection', function (socket) {
     socket.emit('newOrderFromServer', orders)
   })
   socket.on('newOrderFromClient', (data, cb) => {
-    orders[data.id] = data
+    orders.unshift(data)
     fs.writeFileSync('./orders.json', JSON.stringify(orders, null, 2), 'utf-8')
     /* Обновляем список новых заказов у админа */
     socket.emit('newOrderFromServer', orders)

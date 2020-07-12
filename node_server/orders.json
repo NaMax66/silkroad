@@ -1,14 +1,50 @@
-{
-  "4bc544a2-8b73-4c0b-a3c9-f2e1bea2db83": {
-    "id": "4bc544a2-8b73-4c0b-a3c9-f2e1bea2db83",
+[
+  {
+    "id": "c23a12d3-df42-4ba0-aeff-6db02324dd0e",
     "newOrder": [
       {
         "id": "cf7d9892-f141-4a8d-a1b7-073cca71c366",
         "name": "Фарш",
         "price": 12,
         "packageAmount": 100,
-        "amount": 200,
-        "totalSum": 2400
+        "amount": 400,
+        "totalSum": 4800
+      }
+    ],
+    "name": "ddd",
+    "phone": "",
+    "comment": "",
+    "total": 4800,
+    "time": "12.07.2020, 19:09:19"
+  },
+  {
+    "id": "2dc7e5d9-52f1-46e8-90e0-852b2f4f6f49",
+    "newOrder": [
+      {
+        "id": "4f43b2d3-80c0-4f31-8640-d78222567190",
+        "name": "Молоко",
+        "price": 100,
+        "packageAmount": 12,
+        "amount": 12,
+        "totalSum": 1200
+      }
+    ],
+    "name": "sdf",
+    "phone": "",
+    "comment": "",
+    "total": 1200,
+    "time": "12.07.2020, 19:06:14"
+  },
+  {
+    "id": "ef2f499d-f1c7-4c3d-ba89-1dd03c948c96",
+    "newOrder": [
+      {
+        "id": "cf7d9892-f141-4a8d-a1b7-073cca71c366",
+        "name": "Фарш",
+        "price": 12,
+        "packageAmount": 100,
+        "amount": 300,
+        "totalSum": 3600
       },
       {
         "id": "2e850159-bd94-4aa5-804c-0a87930e3b23",
@@ -19,10 +55,10 @@
         "totalSum": 80
       }
     ],
-    "name": "Фокс",
-    "phone": "444-44-44",
-    "comment": "Хочу быстро",
-    "total": 2480,
-    "time": "12.07.2020, 18:45:10"
+    "name": "ыва",
+    "phone": "вв",
+    "comment": "Хочу всё и сразу",
+    "total": 3680,
+    "time": "12.07.2020, 19:06:40"
   }
-}
+]

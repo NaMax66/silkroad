@@ -24,6 +24,12 @@
       "name": "Жвачка",
       "price": 10,
       "packageAmount": 10
+    },
+    {
+      "id": "41123d58-83ea-4399-9977-4015c08e5f82",
+      "name": "Фрукты",
+      "price": 22,
+      "packageAmount": 2
     }
   ]
 }
