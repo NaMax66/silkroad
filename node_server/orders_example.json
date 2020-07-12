@@ -1,20 +1,20 @@
 {
-  "12865750-a7f2-49f8-8f0e-7bef778d2add": {
-    "id": "12865750-a7f2-49f8-8f0e-7bef778d2add",
+  "f249fcc0-8cf5-4170-9fdd-87aff5edd18b": {
+    "id": "f249fcc0-8cf5-4170-9fdd-87aff5edd18b",
     "newOrder": [
       {
-        "id": "1",
+        "id": "cf7d9892-f141-4a8d-a1b7-073cca71c366",
         "name": "Test",
-        "price": 100,
-        "packageAmount": 100,
-        "amount": 100,
-        "totalSum": 10000
+        "price": 0,
+        "packageAmount": 0,
+        "amount": 0,
+        "totalSum": 0
       }
     ],
     "name": "Admin",
-    "phone": "123",
-    "comment": "",
-    "total": 0,
-    "time": "12.07.1970, 12:44:25"
+    "phone": "555",
+    "comment": "Тестовый заказ",
+    "total": 1200,
+    "time": "12.07.1970, 17:53:33"
   }
 }

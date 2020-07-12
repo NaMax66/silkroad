@@ -22,13 +22,14 @@ const io = require('socket.io')(http)
 /* App logic here */
 
 const initCash = function (dbName) {
-  let filePath = `./${dbName}.json`
+  const filePath = `./${dbName}.json`
   let data
   try {
     data = fs.readFileSync(filePath, 'utf8')
   } catch (e) {
     // if no file - create one
-    filePath = `./${dbName}_example.json`
+    const examplePath = `./${dbName}_example.json`
+    data = fs.readFileSync(examplePath, 'utf8')
     fs.writeFileSync(filePath, data, 'utf8')
   }
   return JSON.parse(data)

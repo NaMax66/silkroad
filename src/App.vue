@@ -12,7 +12,7 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/admin">Админ</router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-if="getIsAdmin">
             <router-link class="nav-link" to="/new_orders">Новые заказы</router-link>
           </li>
         </ul>
@@ -21,7 +21,14 @@
     <router-view/>
   </div>
 </template>
-
+<script>
+import { mapGetters } from 'vuex'
+export default {
+  computed: {
+    ...mapGetters(['getIsAdmin'])
+  }
+}
+</script>
 <style lang="postcss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
