@@ -12,6 +12,18 @@
       "name": "Молоко",
       "price": 100,
       "packageAmount": 12
+    },
+    {
+      "id": "2e850159-bd94-4aa5-804c-0a87930e3b23",
+      "name": "Конфеты",
+      "price": 10,
+      "packageAmount": 4
+    },
+    {
+      "id": "46296fee-32a1-4b64-af6e-83146d0c52ee",
+      "name": "Жвачка",
+      "price": 10,
+      "packageAmount": 10
     }
   ]
 }

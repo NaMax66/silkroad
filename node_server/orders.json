@@ -1,82 +1,28 @@
 {
-  "12865750-a7f2-49f8-8f0e-7bef778d2add": {
-    "id": "12865750-a7f2-49f8-8f0e-7bef778d2add",
-    "newOrder": [
-      {
-        "id": "1",
-        "name": "Test",
-        "price": 100,
-        "packageAmount": 100,
-        "amount": 100,
-        "totalSum": 10000
-      }
-    ],
-    "name": "Admin",
-    "phone": "123",
-    "comment": "",
-    "total": 0,
-    "time": "12.07.1970, 12:44:25"
-  },
-  "796765af-ca0f-4293-b40b-d3dd2e867a5e": {
-    "id": "796765af-ca0f-4293-b40b-d3dd2e867a5e",
-    "newOrder": [
-      {
-        "id": "1",
-        "name": "Фарш",
-        "price": 100,
-        "packageAmount": 100,
-        "amount": 100,
-        "totalSum": 10000
-      }
-    ],
-    "name": "Fox",
-    "phone": "",
-    "comment": "",
-    "total": 10000,
-    "time": "12.07.2020, 17:30:04"
-  },
-  "df08beca-7eb1-409a-b022-ec9b47a9d828": {
-    "id": "df08beca-7eb1-409a-b022-ec9b47a9d828",
-    "newOrder": [
-      {
-        "id": "a78b4d33-35bb-438f-96b6-4e2d1a459e0d",
-        "name": "Макароны",
-        "price": "12",
-        "packageAmount": "12",
-        "amount": "12",
-        "totalSum": 144
-      }
-    ],
-    "name": "ыва",
-    "phone": "ыва",
-    "comment": "авыва",
-    "total": 144,
-    "time": "12.07.2020, 17:31:31"
-  },
-  "04b69911-2084-4e66-a8fe-3f0916a7114a": {
-    "id": "04b69911-2084-4e66-a8fe-3f0916a7114a",
+  "4bc544a2-8b73-4c0b-a3c9-f2e1bea2db83": {
+    "id": "4bc544a2-8b73-4c0b-a3c9-f2e1bea2db83",
     "newOrder": [
       {
         "id": "cf7d9892-f141-4a8d-a1b7-073cca71c366",
         "name": "Фарш",
         "price": 12,
         "packageAmount": 100,
-        "amount": 500,
-        "totalSum": 6000
+        "amount": 200,
+        "totalSum": 2400
       },
       {
-        "id": "4f43b2d3-80c0-4f31-8640-d78222567190",
-        "name": "Молоко",
-        "price": 100,
-        "packageAmount": 12,
-        "amount": 36,
-        "totalSum": 3600
+        "id": "2e850159-bd94-4aa5-804c-0a87930e3b23",
+        "name": "Конфеты",
+        "price": 10,
+        "packageAmount": 4,
+        "amount": 8,
+        "totalSum": 80
       }
     ],
-    "name": "Максим",
-    "phone": "123123123",
-    "comment": "Хочу быстрее",
-    "total": 9600,
-    "time": "12.07.2020, 17:47:21"
+    "name": "Фокс",
+    "phone": "444-44-44",
+    "comment": "Хочу быстро",
+    "total": 2480,
+    "time": "12.07.2020, 18:45:10"
   }
 }

@@ -96,6 +96,7 @@ export default {
         packageAmount: 0
       }
       this.addNewProduct(product)
+      this.$emit('save')
     }
   }
 }

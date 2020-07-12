@@ -6,9 +6,7 @@
       </div>
       <button @click.prevent="checkPass" class="btn btn-danger">Войти</button>
     </form>
-    <v-table ref="table" v-if="getIsAdmin" :columns="tableColumns" />
-
-    <button  v-if="getIsAdmin" class="btn btn-success mt-2" @click="sendToServer">Сохранить список на сервере</button>
+    <v-table ref="table" v-if="getIsAdmin" :columns="tableColumns" @save="sendToServer"/>
   </div>
 </template>
 <script>

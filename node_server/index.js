@@ -66,6 +66,13 @@ io.sockets.on('connection', function (socket) {
     const msg = 'ok'
     return cb(msg)
   })
+  socket.on('removeOrder', (id, cb) => {
+    delete orders[id]
+    fs.writeFileSync('./orders.json', JSON.stringify(orders, null, 2), 'utf-8')
+    socket.emit('newOrderFromServer', orders)
+    const msg = 'ok'
+    return cb(msg)
+  })
 })
 
 http.listen(8000, () => {
