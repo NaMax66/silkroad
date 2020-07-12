@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import priceExample from '@/priceExample'
-import { getPrice } from '@/actions'
 import { v4 as uuidv4 } from 'uuid'
 
 Vue.use(Vuex)
@@ -55,14 +53,11 @@ export default new Vuex.Store({
     SOCKET_newOrder (state, message) {
       state.newOrders = message
     },
+    SOCKET_initialPrice (state, message) {
+      state.priceList = message
+    },
     setAdmin (state) {
       state.isAdmin = true
-    },
-    async initPrice (state, payload) {
-      state.priceList = payload
-      if (!state.newPriceList) {
-        state.newPriceList = JSON.parse(JSON.stringify(payload))
-      }
     },
     changePrice (state, payload) {
       state.priceList = payload
@@ -104,17 +99,6 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async initPrice ({ commit }) {
-      let { data } = await getPrice()
-      if (!data.list) {
-        data = priceExample
-      }
-      data.list.forEach(el => {
-        el.packageAmount = +el.packageAmount
-        el.price = +el.price
-      })
-      commit('initPrice', data)
-    },
     changePrice ({ commit }, price) {
       commit('changePrice', price)
     },

@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   category: 'Пакеты и Бытовые принадлежности',
   list: [
     {

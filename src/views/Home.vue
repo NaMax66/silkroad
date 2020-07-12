@@ -10,9 +10,6 @@
 export default {
   name: 'Home',
   components: {
-  },
-  created () {
-    console.log(process.env)
   }
 }
 </script>

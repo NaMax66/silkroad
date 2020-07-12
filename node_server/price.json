@@ -8,28 +8,22 @@
       "packageAmount": 100
     },
     {
-      "id": "e04f0bf6-e8ff-4ab6-89dd-2b416b397af1",
-      "name": "Морс",
-      "price": 2,
-      "packageAmount": 2
-    },
-    {
       "id": "2e6f7bd4-eabe-47a2-b35e-e500f1cffcbd",
       "name": "Котлеты",
       "price": 221,
       "packageAmount": 12
     },
     {
-      "id": "4c43ce4e-1b89-471c-9461-23ac902dbeee",
-      "name": "Очки",
-      "price": 100,
-      "packageAmount": 1
-    },
-    {
       "id": "0d5f6313-3ed6-4a53-aaa7-034bbb372813",
       "name": "Мешки",
       "price": "10",
       "packageAmount": "30"
+    },
+    {
+      "id": "4cf15678-4d16-489f-baa6-b4f8c4c06d7e",
+      "name": "Туфли",
+      "price": "12",
+      "packageAmount": "22"
     }
   ]
 }

@@ -6,14 +6,13 @@
       </div>
       <button @click.prevent="checkPass" class="btn btn-danger">Войти</button>
     </form>
-    <v-table v-if="getIsAdmin" :columns="tableColumns" />
+    <v-table ref="table" v-if="getIsAdmin" :columns="tableColumns" />
 
     <button  v-if="getIsAdmin" class="btn btn-success mt-2" @click="sendToServer">Сохранить список на сервере</button>
   </div>
 </template>
 <script>
 import VTable from '@/components/VTable'
-import { changePrice } from '@/actions'
 import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Admin',
@@ -27,18 +26,17 @@ export default {
   computed: {
     ...mapGetters(['getNewPrice', 'getIsAdmin'])
   },
-  async created () {
-    await this.initPrice()
-  },
   methods: {
-    ...mapActions(['initPrice', 'setAdmin']),
+    ...mapActions(['setAdmin']),
     checkPass () {
-      if (this.password === 'salam') {
+      if (this.password === '1') {
         this.setAdmin()
       }
     },
     sendToServer () {
-      changePrice(this.getNewPrice)
+      this.$socket.emit('updatePrice', this.getNewPrice, msg => {
+        console.log(msg)
+      })
     }
   }
 }

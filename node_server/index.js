@@ -3,6 +3,7 @@ const fs = require('fs')
 const express = require('express')
 const bodyParser = require('body-parser')
 const history = require('connect-history-api-fallback')
+const priceExample = require('./priceExample')
 const app = express()
 
 app.use(bodyParser.json())
@@ -22,7 +23,7 @@ const io = require('socket.io')(http)
 /* App logic here */
 
 const initCash = function (filePath) {
-  let data = {}
+  let data = priceExample
   try {
     data = fs.readFileSync(filePath, 'utf8')
   } catch (e) {
@@ -45,16 +46,6 @@ app.post('/api/new_order', (req, res) => {
   res.send('OK')
 })
 
-app.post('/api/change_price', (req, res) => {
-  price = req.body
-  fs.writeFileSync('./price.json', JSON.stringify(req.body, null, 2), 'utf-8')
-  res.send('OK')
-})
-
-app.get('/api/get_price', (req, res) => {
-  res.send(price)
-})
-
 let hasNewOrder = false
 io.sockets.on('connection', function (socket) {
   setInterval(() => {
@@ -64,8 +55,17 @@ io.sockets.on('connection', function (socket) {
     }
   }, 10000)
 
-  socket.on('getPrice', () => {
-    socket.emit(price)
+  socket.on('getPrice', (data, cb) => {
+    socket.emit('initialPrice', price)
+    const msg = 'ok'
+    return cb(msg)
+  })
+
+  socket.on('updatePrice', (data, cb) => {
+    price = data
+    fs.writeFileSync('./price.json', JSON.stringify(price, null, 2), 'utf-8')
+    const msg = 'Прайс обновлен'
+    return cb(msg)
   })
 
   socket.on('getNewOrders', () => {

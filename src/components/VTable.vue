@@ -69,20 +69,21 @@ export default {
   computed: {
     ...mapGetters(['getNewPrice'])
   },
-  watch: {
-    getNewPrice () {
-      this.productList = this.getNewPrice
-    }
-  },
-  async created () {
-    this.isFetching = true
-    await this.initPrice()
-    this.isFetching = false
+  created () {
+    this.$socket.emit('getPrice', null, (msg) => {
+      if (msg === 'ok') {
+        this.setList()
+        this.saveToLocal(this.productList)
+      }
+    })
   },
   methods: {
-    ...mapMutations(['initPrice', 'saveToLocal', 'addNewProduct', 'removeItemById']),
+    ...mapMutations(['saveToLocal', 'addNewProduct', 'removeItemById']),
     handleInput () {
       this.saveToLocal(this.productList)
+    },
+    setList () {
+      this.productList = this.getNewPrice
     },
     handleAdd () {
       const product = Object.assign({}, this.newProduct)

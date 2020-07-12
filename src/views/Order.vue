@@ -86,9 +86,8 @@
 <script>
 import { getNicePrice } from '@/utils'
 import { mapGetters, mapActions } from 'vuex'
-import { sendOrder } from '@/actions'
 import VModal from '@/components/VModal'
-import { v4 as uuidv4 } from 'uuid'
+// import { v4 as uuidv4 } from 'uuid'
 
 export default {
   components: {
@@ -113,11 +112,11 @@ export default {
   computed: {
     ...mapGetters(['getPrice', 'getOrder', 'getTotalOrderSum'])
   },
-  async created () {
-    await this.initPrice()
+  created () {
+    this.$socket.emit('getPrice', null, () => {})
   },
   methods: {
-    ...mapActions(['initPrice', 'addToOrder', 'clearOrder']),
+    ...mapActions(['addToOrder', 'clearOrder']),
     getProductPrice (product) {
       const productInOrder = this.getOrder.find(el => el.id === product.id)
       let total = getNicePrice(0)
@@ -139,7 +138,7 @@ export default {
     async sendOrder () {
       /* todo возвращать с сервера уникальный номер заказа. Показывать заказчику */
       this.isFetching = true
-      const order = {
+      /*  const order = {
         id: uuidv4(),
         newOrder: this.getOrder,
         name: this.name,
@@ -161,7 +160,7 @@ export default {
         this.showModalError()
       }
       this.isModalShown = false
-      this.isFetching = false
+      this.isFetching = false */
     },
     showModalSuccess () {
       this.isModalSuccessShown = true
