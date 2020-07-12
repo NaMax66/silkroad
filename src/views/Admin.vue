@@ -27,7 +27,7 @@ export default {
   methods: {
     ...mapActions(['setAdmin']),
     checkPass () {
-      if (this.password === '1') {
+      if (this.password === 'salam') {
         this.setAdmin()
       }
     },

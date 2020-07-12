@@ -14,7 +14,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(product, index) in productList.list" :key="product.id">
+      <tr class="v-table_product" v-for="(product, index) in productList.list" :key="product.id">
         <td>{{index}}</td>
         <td>
           <input class="w-100 border-0 bg-transparent" type="text" v-model="product.name" @input="handleInput">
@@ -25,7 +25,7 @@
         <td class="v-table_pack">
           <input class="w-100 border-0 bg-transparent" type="number" v-model="product.packageAmount" @input="handleInput">
         </td>
-        <td><button class="btn btn-danger btn-sm" @click="removeItemById(product.id)">&times;</button></td>
+        <td><button class="v-table_remove_btn btn btn-danger btn-sm" @click="removeItemById(product.id)">&times;</button></td>
       </tr>
       <tr>
         <td>*</td>
@@ -113,4 +113,14 @@ export default {
     width: 160px;
   }
 }
+  .v-table_remove_btn {
+    visibility: hidden;
+  }
+  .v-table_product {
+    &:hover {
+      & .v-table_remove_btn {
+        visibility: visible;
+      }
+    }
+  }
 </style>
