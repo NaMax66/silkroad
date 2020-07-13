@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mb-5">
     <form class="col-lg-4" v-if="!getIsAdmin">
       <div class="form-group">
         <input v-model="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Введите пароль">
@@ -7,7 +7,7 @@
       <button @click.prevent="checkPass" class="btn btn-danger">Войти</button>
     </form>
     <v-table ref="table" v-if="getIsAdmin" :columns="tableColumns" @save="sendToServer" @dataChanged="isActionBtnActive = true"/>
-    <button :class="{'btn-danger': isActionBtnActive, 'btn-light': !isActionBtnActive}" class="btn fixed-bottom mb-2 ml-2" @click="sendToServer">Сохранить</button>
+    <button v-if="getIsAdmin" :class="{'btn-danger': isActionBtnActive, 'btn-light': !isActionBtnActive}" class="btn fixed-bottom mb-2 ml-2" @click="sendToServer">Сохранить</button>
   </div>
 </template>
 <script>

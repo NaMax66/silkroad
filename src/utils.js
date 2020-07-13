@@ -13,6 +13,12 @@ export const getNicePrice = (price) => {
 }
 
 export const validatePrice = (price) => {
+  if (price.list) {
+    price.list.forEach(el => {
+      el.price = +el.price
+      el.packageAmount = +el.packageAmount
+    })
+  }
   return price
 }
 

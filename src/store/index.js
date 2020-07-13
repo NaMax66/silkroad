@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { v4 as uuidv4 } from 'uuid'
+import { validatePrice } from '@/utils'
 
 Vue.use(Vuex)
 
@@ -54,6 +55,7 @@ export default new Vuex.Store({
       state.newOrders = message
     },
     SOCKET_initialPrice (state, message) {
+      message = validatePrice(message)
       state.priceList = message
     },
     setAdmin (state) {
