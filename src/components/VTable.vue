@@ -1,16 +1,12 @@
 <template>
   <div>
-    <div v-if="isFetching" class="text-center p-2">
-      <div class="spinner-border" role="status">
-        <span class="sr-only">Подождите...</span>
-      </div>
-    </div>
-    <table class="table table-sm table-striped" v-if="columns.length && productList && !isFetching">
+    <table class="table table-sm table-striped" v-if="productList">
       <thead>
       <tr>
-        <th scope="col" v-for="(col, i) in columns" :key="i">
-          {{col}}
-        </th>
+        <th scope="col">{{$t('num')}}</th>
+        <th scope="col">{{$t('unitName')}}</th>
+        <th scope="col">{{$t('price')}}</th>
+        <th scope="col">{{$t('total')}}</th>
       </tr>
       </thead>
       <tbody>
@@ -25,7 +21,7 @@
         <td class="v-table_pack">
           <input class="w-100 border-0 bg-transparent" type="number" v-model="product.packageAmount" @input="handleInput">
         </td>
-        <td><button class="v-table_remove_btn btn btn-danger btn-sm" @click="removeItemById(product.id)">&times;</button></td>
+        <td><button class="v-table_remove_btn btn btn-danger btn-sm" @click="removeItem(product.id)">&times;</button></td>
       </tr>
       <tr>
         <td>*</td>
@@ -51,7 +47,6 @@ import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'VTable',
   data: () => ({
-    isFetching: false,
     productList: {},
     newProduct: {
       id: null,
@@ -60,12 +55,6 @@ export default {
       packageAmount: 0
     }
   }),
-  props: {
-    columns: {
-      type: Array,
-      default: () => []
-    }
-  },
   computed: {
     ...mapGetters(['getNewPrice'])
   },
@@ -79,6 +68,10 @@ export default {
   },
   methods: {
     ...mapMutations(['saveToLocal', 'addNewProduct', 'removeItemById']),
+    removeItem (id) {
+      this.removeItemById(id)
+      this.$emit('dataChanged')
+    },
     handleInput () {
       this.$emit('dataChanged')
       this.saveToLocal(this.productList)

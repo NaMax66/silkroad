@@ -1,5 +1,6 @@
 export const messages = {
   en: {
+    save: 'Save',
     clientName: 'Client',
     phone: 'Phone',
     address: 'Address',
@@ -7,16 +8,18 @@ export const messages = {
     commentPlaceholder: 'Comments on the order (optional)',
     namePlaceholder: 'Your name',
     phonePlaceholder: 'Your phone',
-    price: 'Unit price',
-    num: 'No.',
-    unitName: 'Name',
-    minAmount: 'min. qty',
-    inOrder: 'In order, qty',
-    total: 'Total',
-    superTotal: 'TOTAL:',
-    currency: 'GBP',
     makeOrder: 'Checkout',
     goBack: 'Go back',
+    currency: 'GBP',
+    table: {
+      price: 'Unit price',
+      num: 'No.',
+      unitName: 'Name',
+      minAmount: 'min. qty',
+      inOrder: 'In order, qty',
+      total: 'Total',
+      superTotal: 'TOTAL:'
+    },
     newOrderModal: {
       header: 'Your order has been prepared',
       msg: 'Enter your name and phone number',
@@ -41,6 +44,7 @@ export const messages = {
     }
   },
   ru: {
+    save: 'Сохранить',
     clientName: 'Имя',
     phone: 'Телефон',
     address: 'Адрес',
@@ -48,16 +52,18 @@ export const messages = {
     commentPlaceholder: 'Комментарии к заказу(не обязательно)',
     namePlaceholder: 'Ваше имя',
     phonePlaceholder: 'Ваш телефон',
-    price: 'Цена, шт.',
-    num: '№',
-    unitName: 'Название',
-    minAmount: 'Мин. кол-во',
-    inOrder: 'В заказе, шт',
-    total: 'Сумма',
-    superTotal: 'Итого на сумму:',
-    currency: 'руб',
     makeOrder: 'Оформить заказ',
     goBack: 'Вернуться',
+    currency: 'руб',
+    table: {
+      price: 'Цена, шт.',
+      num: '№',
+      unitName: 'Название',
+      minAmount: 'Мин. кол-во',
+      inOrder: 'В заказе, шт',
+      total: 'Сумма',
+      superTotal: 'Итого на сумму:'
+    },
     newOrderModal: {
       header: 'Ваш заказ подготовлен',
       msg: 'Введите ваше имя и телефон',

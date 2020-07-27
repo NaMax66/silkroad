@@ -2,12 +2,18 @@
   <div class="container mb-5">
     <form class="col-lg-4" v-if="!getIsAdmin">
       <div class="form-group">
-        <input v-model="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Введите пароль">
+        <input
+          v-model="password"
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+          :placeholder="$t('admin.passwordPlaceholder')"
+        >
       </div>
-      <button @click.prevent="checkPass" class="btn btn-danger">Войти</button>
+      <button @click.prevent="checkPass" class="btn btn-danger">{{$t('admin.enter')}}</button>
     </form>
-    <v-table ref="table" v-if="getIsAdmin" :columns="tableColumns" @save="sendToServer" @dataChanged="isActionBtnActive = true"/>
-    <button v-if="getIsAdmin" :class="{'btn-danger': isActionBtnActive, 'btn-light': !isActionBtnActive}" class="btn fixed-bottom mb-2 ml-2" @click="sendToServer">Сохранить</button>
+    <v-table ref="table" v-if="getIsAdmin" @save="sendToServer" @dataChanged="isActionBtnActive = true"/>
+    <button v-if="getIsAdmin" :class="{'btn-danger': isActionBtnActive, 'btn-light': !isActionBtnActive}" class="btn fixed-bottom mb-2 ml-2" @click="sendToServer">{{$t('save')}}</button>
   </div>
 </template>
 <script>
@@ -20,11 +26,13 @@ export default {
   },
   data: () => ({
     password: '',
-    tableColumns: ['№', 'Название', 'Цена, шт', 'Мин. кол-во'],
     isActionBtnActive: false
   }),
   computed: {
     ...mapGetters(['getNewPrice', 'getIsAdmin'])
+  },
+  beforeDestroy () {
+    this.sendToServer()
   },
   methods: {
     ...mapActions(['setAdmin']),

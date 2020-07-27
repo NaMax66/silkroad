@@ -2,32 +2,33 @@
   <div class="container" v-if="getIsAdmin">
     <div class="mt-3 border-bottom" v-for="item in getNewOrders" :key="item.id">
       <div class="d-flex">
-        <h5 class="pr-3">Имя: {{item.name}}</h5>
-        <h5>Телефон: {{item.phone}}</h5>
+        <h5 class="pr-3 text-danger">{{$t('clientName')}}: {{item.name}}</h5>
+        <h5 class="pr-3">{{$t('phone')}}: {{item.phone}}</h5>
+        <h5 class="text-danger">{{item.time}}</h5>
       </div>
-      <p class="mb-3 mt-3">Комментарий: {{item.comment}}</p>
+      <p class="mb-3 mt-3">{{$t('comment')}}: {{item.comment}}</p>
       <table class="mt-2 table table-sm table-striped" v-if="getNewOrders">
         <thead>
         <tr>
-          <th scope="col">№</th>
-          <th scope="col">Название</th>
-          <th scope="col">Цена, шт.</th>
-          <th scope="col">В заказе, шт</th>
-          <th scope="col">Сумма</th>
+          <th scope="col">{{$t('table.num')}}</th>
+          <th scope="col">{{$t('table.unitName')}}</th>
+          <th scope="col">{{$t('table.price')}}</th>
+          <th scope="col">{{$t('table.inOrder')}}</th>
+          <th scope="col">{{$t('table.total')}}</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="(product, index) in item.newOrder" :key="product.id">
           <td>{{index}}</td>
           <td>{{product.name}}</td>
-          <td>{{product.price | getNicePrice}}</td>
+          <td>{{getNicePrice(product.price)}}</td>
           <td>{{product.amount}}</td>
-          <td>{{product.totalSum | getNicePrice}}</td>
+          <td>{{getNicePrice(product.totalSum)}}</td>
         </tr>
         <tr>
           <td colspan="2"><button class="btn btn-danger btn-sm" @click="removeOrder(item.id)">&times;</button></td>
-          <td colspan="2" class="text-right">Итого на сумму:</td>
-          <td>{{item.total | getNicePrice}}</td>
+          <td colspan="2" class="text-right">{{$t('table.superTotal')}}</td>
+          <td>{{getNicePrice(item.total)}}</td>
         </tr>
         </tbody>
       </table>
@@ -44,15 +45,13 @@ export default {
   computed: {
     ...mapGetters(['getNewOrders', 'getIsAdmin'])
   },
-  filters: {
-    getNicePrice (price) {
-      return getNicePrice(price)
-    }
-  },
   created () {
     this.$socket.emit('getNewOrders')
   },
   methods: {
+    getNicePrice (price) {
+      return getNicePrice(price, this.$t('currency'))
+    },
     removeOrder (id) {
       this.$socket.emit('removeOrder', id, (msg) => {
         if (msg === 'ok') {
