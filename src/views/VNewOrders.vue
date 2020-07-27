@@ -4,9 +4,9 @@
       <div class="d-flex">
         <h5 class="pr-3 text-danger">{{$t('clientName')}}: {{item.name}}</h5>
         <h5 class="pr-3">{{$t('phone')}}: {{item.phone}}</h5>
-        <h5 class="text-danger">{{item.time}}</h5>
       </div>
-      <p class="mb-3 mt-3">{{$t('comment')}}: {{item.comment}}</p>
+      <p class="mb-1 mt-3">{{$t('comment')}}: {{item.comment}}</p>
+      <h6 class="mb-3 text-danger">{{$t('time')}}: {{item.time}}</h6>
       <table class="mt-2 table table-sm table-striped" v-if="getNewOrders">
         <thead>
         <tr>
