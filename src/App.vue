@@ -4,6 +4,7 @@
       <div class="navbar navbar-expand-lg navbar-light bg-light">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
+            <!-- todo убрать главную, сделать news -->
             <router-link class="nav-link" to="/">Главная</router-link>
           </li>
           <li class="nav-item">

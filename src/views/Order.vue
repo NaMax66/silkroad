@@ -4,9 +4,9 @@
     <table class="table table-sm table-striped" v-if="getPrice">
       <thead>
       <tr>
-        <th scope="col">№</th>
+        <th scope="col">{{ $t('num') }}</th>
         <th scope="col">Название</th>
-        <th scope="col">Цена, шт.</th>
+        <th scope="col">{{ $t('price') }}</th>
         <th scope="col">Мин. кол-во</th>
         <th scope="col">В заказе, шт</th>
         <th scope="col">Сумма</th>
@@ -19,6 +19,7 @@
         <td>{{product.price | getNicePrice}}</td>
         <td>{{product.packageAmount}} шт.</td>
         <th scope="col">
+          <!-- todo зафиксировать ширину -->
           <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-secondary btn-sm" @click="addAmount('minus', product.id)">-</button>
             <button type="button" style="min-width: 40px" class="btn btn-secondary btn-sm disabled" aria-disabled="true">{{getAmount(product)}}</button>
@@ -46,7 +47,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <p>Точно выбрали всё что надо? <br> Если да - введите имя и телефон. Нажмите "Оформить заказ"</p>
+            <p class="mb-2">Введите ваше имя и телефон</p>
             <input type="text" class="form-control" placeholder="Ваше имя" v-model="name">
             <input type="number" class="form-control  mt-2" placeholder="Ваш телефон" v-model="phone">
           </div>

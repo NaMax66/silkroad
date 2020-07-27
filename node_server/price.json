@@ -35,31 +35,7 @@
       "id": "2132d325-742e-469d-a24f-182a3b16f0a2",
       "name": "Томаты",
       "price": 14,
-      "packageAmount": 10
-    },
-    {
-      "id": "6ce30343-fe16-4572-b728-c10197f0c1d2",
-      "name": "",
-      "price": 0,
-      "packageAmount": 0
-    },
-    {
-      "id": "484fbf0b-c917-4e40-8e73-5b0fdaf076bc",
-      "name": "",
-      "price": 0,
-      "packageAmount": 0
-    },
-    {
-      "id": "13b64670-2ec7-4705-aa4b-41f5b2b2e50c",
-      "name": "",
-      "price": 0,
-      "packageAmount": 0
-    },
-    {
-      "id": "e89651bf-e3ac-4b01-bf0a-e1fb341bf86e",
-      "name": "",
-      "price": 0,
-      "packageAmount": 0
+      "packageAmount": "12"
     }
   ]
 }

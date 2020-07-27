@@ -29,6 +29,7 @@ export default {
   methods: {
     ...mapActions(['setAdmin']),
     checkPass () {
+      // todo хранить пароль на сервере. Добавлять пользователя в список админов и отправлять сообщения о новых заказах только ему
       if (this.password === 'salam') {
         this.setAdmin()
       }
