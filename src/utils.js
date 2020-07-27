@@ -15,6 +15,9 @@ export const getNicePrice = (price, unit = '') => {
 }
 
 export const validatePrice = (price) => {
+  if (!isValid(price)) {
+    return
+  }
   if (price.list) {
     price.list.forEach(el => {
       el.price = +el.price

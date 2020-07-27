@@ -19,6 +19,12 @@ app.use(async (req, res, next) => {
 const http = require('http').createServer(app)
 const io = require('socket.io')(http)
 
+const isValid = (data) => {
+  if (!data) {
+    console.log('price is invalid. Value = ', data)
+  }
+  return !!data
+}
 const initCash = function (dbName) {
   const filePath = `./${dbName}.json`
   let data
@@ -51,9 +57,15 @@ io.sockets.on('connection', function (socket) {
   })
 
   socket.on('updateNews', (data, cb) => {
-    news = data
-    fs.writeFileSync('./news.json', JSON.stringify(news, null, 2), 'utf-8')
-    const msg = ' News updated'
+    let msg = ''
+
+    if (isValid(data)) {
+      news = data
+      fs.writeFileSync('./news.json', JSON.stringify(news, null, 2), 'utf-8')
+      msg = 'News updated'
+    } else {
+      msg = 'Wrong Data!'
+    }
     return cb(msg)
   })
 

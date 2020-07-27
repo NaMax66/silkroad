@@ -12,6 +12,8 @@ export const messages = {
     makeOrder: 'Checkout',
     goBack: 'Go back',
     currency: 'GBP',
+    price: 'Price',
+    news: 'News',
     table: {
       price: 'Unit price',
       num: 'No.',
@@ -57,6 +59,8 @@ export const messages = {
     makeOrder: 'Оформить заказ',
     goBack: 'Вернуться',
     currency: 'руб',
+    price: 'Цена',
+    news: 'Новости',
     table: {
       price: 'Цена, шт.',
       num: '№',

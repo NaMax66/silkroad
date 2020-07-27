@@ -3,10 +3,10 @@
     <table class="table table-sm table-striped" v-if="productList">
       <thead>
       <tr>
-        <th scope="col">{{$t('table.num')}}</th>
-        <th scope="col">{{$t('table.unitName')}}</th>
-        <th scope="col">{{$t('table.price')}}</th>
-        <th scope="col">{{$t('table.total')}}</th>
+        <th scope="col" class="border-top-0">{{$t('table.num')}}</th>
+        <th scope="col" class="border-top-0">{{$t('table.unitName')}}</th>
+        <th scope="col" class="border-top-0">{{$t('table.price')}}</th>
+        <th scope="col" class="border-top-0">{{$t('table.total')}}</th>
       </tr>
       </thead>
       <tbody>
