@@ -8,18 +8,19 @@ export const messages = {
     namePlaceholder: 'Your name',
     phonePlaceholder: 'Your phone',
     price: 'Unit price',
-    num: 'No',
+    num: 'No.',
     unitName: 'Name',
     minAmount: 'min. qty',
     inOrder: 'In order, qty',
     total: 'Total',
-    superTotal: 'TOTAL',
-    currency: 'EUR',
+    superTotal: 'TOTAL:',
+    currency: 'GBP',
     makeOrder: 'Checkout',
     goBack: 'Go back',
     newOrderModal: {
       header: 'Your order has been prepared',
-      msg: 'Enter your name and phone number'
+      msg: 'Enter your name and phone number',
+      successMsg: 'Your order have been prepared!<br>We\'ll call you back.'
     },
     admin: {
       passwordPlaceholder: 'Enter the password',
@@ -33,6 +34,10 @@ export const messages = {
     },
     units: {
       piece: ''
+    },
+    warnings: {
+      errorMsg: 'Failed to place an order automatically',
+      connectToUsMsg: 'Contact us by phone:'
     }
   },
   ru: {
@@ -49,13 +54,14 @@ export const messages = {
     minAmount: 'Мин. кол-во',
     inOrder: 'В заказе, шт',
     total: 'Сумма',
-    superTotal: 'Итого на сумму',
+    superTotal: 'Итого на сумму:',
     currency: 'руб',
     makeOrder: 'Оформить заказ',
     goBack: 'Вернуться',
     newOrderModal: {
       header: 'Ваш заказ подготовлен',
-      msg: 'Введите ваше имя и телефон'
+      msg: 'Введите ваше имя и телефон',
+      successMsg: 'Ваш заказ отправлен!<br>Мы вам перезвоним.'
     },
     admin: {
       passwordPlaceholder: 'Введите пароль',
@@ -69,6 +75,10 @@ export const messages = {
     },
     units: {
       piece: 'шт'
+    },
+    warnings: {
+      errorMsg: 'Не удалось оформить заказ автоматически',
+      connectToUsMsg: 'Свяжитесь с нами по телефону:'
     }
   }
 }

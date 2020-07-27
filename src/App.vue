@@ -4,17 +4,16 @@
       <div class="navbar navbar-expand-lg navbar-light bg-light">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <!-- todo убрать главную, сделать news -->
-            <router-link class="nav-link" to="/">Главная</router-link>
+            <router-link class="nav-link" to="/">{{$t('routs.order')}}</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/order">Заказать</router-link>
+            <router-link class="nav-link" to="/news">{{$t('routs.news')}}</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/admin">Админ</router-link>
+            <router-link class="nav-link" to="/admin">{{$t('routs.admin')}}</router-link>
           </li>
           <li class="nav-item" v-if="getIsAdmin">
-            <router-link class="nav-link" to="/new_orders">Новые заказы</router-link>
+            <router-link class="nav-link" to="/new_orders">{{$t('routs.newOrders')}}</router-link>
           </li>
         </ul>
       </div>

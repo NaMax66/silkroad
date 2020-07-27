@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="text-danger mb-5" v-if="isOperatorPhoneShown">Свяжитесь с нами по телефону: <br> {{operatorPhone}}</h1>
+    <h1 class="text-danger mb-5" v-if="isOperatorPhoneShown">{{$t('warnings.connectToUsMsg')}} <br> {{operatorPhone}}</h1>
     <table class="table table-sm table-striped" v-if="getPrice">
       <thead>
       <tr>
@@ -25,60 +25,56 @@
             <button type="button" class="btn btn-secondary btn-sm" @click="addAmount('plus', product.id)">+</button>
           </div>
         </th>
-        <td>{{getProductPrice(product)}}</td>
+        <td style="min-width: 95px">{{getProductPrice(product)}}</td>
       </tr>
       <tr>
-        <td colspan="5" class="text-right">Итого на сумму:</td>
+        <td colspan="5" class="text-right font-weight-bold">{{$t('superTotal')}}</td>
         <td>{{getNicePrice(getTotalOrderSum)}}</td>
       </tr>
       </tbody>
     </table>
     <!--todo ограничить число символов, сделать проверку-->
     <div>
-      <textarea class="mt-2 w-100" placeholder="Комментарии к заказу(не обязательно)" v-model="comment" rows="2"></textarea>
+      <textarea class="mt-2 w-100" :placeholder="$t('commentPlaceholder')" v-model="comment" rows="2"></textarea>
     </div>
     <!-- todo это убрать -->
-    <button class="btn btn-danger" @click="handleActionBtn">Оформить заказ</button>
+    <button class="btn btn-danger" @click="handleActionBtn">{{$t('makeOrder')}}</button>
     <v-modal :is-modal-shown="isModalShown">
           <div class="modal-header">
-            <h5 class="modal-title">Ваш заказ подготовлен</h5>
+            <h5 class="modal-title">{{$t('newOrderModal.header')}}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="isModalShown = false">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <p class="mb-2">Введите ваше имя и телефон</p>
-            <input type="text" class="form-control" placeholder="Ваше имя" v-model="name">
-            <input type="number" class="form-control  mt-2" placeholder="Ваш телефон" v-model="phone">
+            <p class="mb-2">{{$t('newOrderModal.msg')}}</p>
+            <input type="text" class="form-control" :placeholder="$t('namePlaceholder')" v-model="name">
+            <!-- todo fix '-' -->
+            <input type="number" class="form-control  mt-2" :placeholder="$t('phonePlaceholder')" v-model="phone">
           </div>
-          <div v-if="!isFetching" class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="isModalShown = false">Вернуться</button>
-            <button type="button" class="btn btn-danger" @click="sendOrder">Оформить заказ</button>
-          </div>
-          <div class="text-center p-2">
-            <div  v-if="isFetching" class="spinner-border" role="status">
-              <span class="sr-only">Подождите...</span>
-            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="isModalShown = false">{{$t('goBack')}}</button>
+            <button type="button" class="btn btn-danger" @click="sendOrder">{{$t('makeOrder')}}</button>
           </div>
     </v-modal>
+    <!-- todo add validator -->
     <v-modal :is-modal-shown="isModalSuccessShown">
       <div class="modal-body">
-        <h3>Ваш заказ отправлен!</h3>
-        <h3>Мы вам перезвоним</h3>
+        <h3 v-html="$t('newOrderModal.successMsg')"></h3>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-danger" @click="makeNewOrder">Оформить новый заказ</button>
+        <button class="btn btn-danger" @click="closeModalSuccess">OK</button>
       </div>
     </v-modal>
     <v-modal :is-modal-shown="isModalErrorShown">
       <div class="modal-body">
-        <h3>Не удалось оформить заказ автоматически</h3>
-        <p>Свяжитесь с нами по телефону:</p>
-        <!--todo узнать телефон на всякйи случай-->
+        <h3>{{$t('warnings.errorMsg')}}</h3>
+        <p>{{$t('warnings.connectToUsMsg')}}</p>
+        <!--todo узнать телефон на всякий случай-->
         <h1>{{operatorPhone}}</h1>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-danger" @click="closeModalError">Оформить новый заказ</button>
+        <button class="btn btn-danger" @click="closeModalError">OK</button>
       </div>
     </v-modal>
   </div>
@@ -101,7 +97,6 @@ export default {
     phone: '',
     name: '',
     comment: '',
-    isFetching: false,
     isOperatorPhoneShown: false,
     operatorPhone: '555-55-55'
   }),
@@ -118,9 +113,9 @@ export default {
     },
     getProductPrice (product) {
       const productInOrder = this.getOrder.find(el => el.id === product.id)
-      let total = getNicePrice(0)
+      let total = this.getNicePrice(0)
       if (productInOrder) {
-        total = getNicePrice(productInOrder.price * productInOrder.amount)
+        total = this.getNicePrice(productInOrder.price * productInOrder.amount)
       }
       return total
     },
@@ -136,7 +131,6 @@ export default {
     },
     async sendOrder () {
       /* todo возвращать с сервера уникальный номер заказа. Показывать заказчику */
-      this.isFetching = true
       const order = {
         id: uuidv4(),
         newOrder: this.getOrder,
@@ -154,7 +148,6 @@ export default {
         }
       })
       this.isModalShown = false
-      this.isFetching = false
     },
     showModalSuccess () {
       this.isModalSuccessShown = true
@@ -162,9 +155,8 @@ export default {
     showModalError () {
       this.isModalErrorShown = true
     },
-    makeNewOrder () {
+    closeModalSuccess () {
       this.isModalSuccessShown = false
-      /* очищаем объект заказ */
       this.clearOrder()
     },
     closeModalError () {
