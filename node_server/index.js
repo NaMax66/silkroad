@@ -19,8 +19,6 @@ app.use(async (req, res, next) => {
 const http = require('http').createServer(app)
 const io = require('socket.io')(http)
 
-/* App logic here */
-
 const initCash = function (dbName) {
   const filePath = `./${dbName}.json`
   let data
@@ -35,7 +33,6 @@ const initCash = function (dbName) {
   return JSON.parse(data)
 }
 
-/* cash variables */
 let orders, price, news
 // eslint-disable-next-line prefer-const
 orders = initCash('orders')
