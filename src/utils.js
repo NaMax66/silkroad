@@ -1,3 +1,5 @@
+console.log(this)
+
 const isValid = (price) => {
   if (!price) {
     console.log('price is invalid. Value = ', price)
@@ -5,11 +7,11 @@ const isValid = (price) => {
   return !!price
 }
 
-export const getNicePrice = (price) => {
+export const getNicePrice = (price, unit = '') => {
   if (!isValid(price)) {
     price = 0
   }
-  return price.toLocaleString() + ' руб'
+  return price.toLocaleString() + ` ${unit}`
 }
 
 export const validatePrice = (price) => {

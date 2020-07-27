@@ -10,11 +10,11 @@ export const messages = {
     price: 'Unit price',
     num: 'No',
     unitName: 'Name',
-    minAmount: 'min. amount',
-    inOrder: 'In order, amount',
+    minAmount: 'min. qty',
+    inOrder: 'In order, qty',
     total: 'Total',
     superTotal: 'TOTAL',
-    unit: 'EUR',
+    currency: 'EUR',
     makeOrder: 'Checkout',
     goBack: 'Go back',
     newOrderModal: {
@@ -30,6 +30,9 @@ export const messages = {
       admin: 'Admin',
       newOrders: 'New Orders',
       news: 'News'
+    },
+    units: {
+      piece: ''
     }
   },
   ru: {
@@ -47,7 +50,7 @@ export const messages = {
     inOrder: 'В заказе, шт',
     total: 'Сумма',
     superTotal: 'Итого на сумму',
-    unit: 'руб',
+    currency: 'руб',
     makeOrder: 'Оформить заказ',
     goBack: 'Вернуться',
     newOrderModal: {
@@ -63,6 +66,9 @@ export const messages = {
       admin: 'Админ',
       newOrders: 'Новые заказы',
       news: 'Новости'
+    },
+    units: {
+      piece: 'шт'
     }
   }
 }

@@ -5,21 +5,20 @@
       <thead>
       <tr>
         <th scope="col">{{ $t('num') }}</th>
-        <th scope="col">Название</th>
+        <th scope="col">{{ $t('unitName') }}</th>
         <th scope="col">{{ $t('price') }}</th>
-        <th scope="col">Мин. кол-во</th>
-        <th scope="col">В заказе, шт</th>
-        <th scope="col">Сумма</th>
+        <th scope="col">{{ $t('minAmount') }}</th>
+        <th scope="col">{{ $t('inOrder') }}</th>
+        <th scope="col">{{ $t('total') }}</th>
       </tr>
       </thead>
       <tbody>
       <tr v-for="(product, index) in getPrice.list" :key="product.id">
         <td scope="row">{{ index }}</td>
         <td>{{product.name}}</td>
-        <td>{{product.price | getNicePrice}}</td>
-        <td>{{product.packageAmount}} шт.</td>
-        <th scope="col">
-          <!-- todo зафиксировать ширину -->
+        <td>{{getNicePrice(product.price) }}</td>
+        <td>{{product.packageAmount}} <span>{{$t('units.piece')}}</span></td>
+        <th scope="col" style="min-width: 110px;">
           <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-secondary btn-sm" @click="addAmount('minus', product.id)">-</button>
             <button type="button" style="min-width: 40px" class="btn btn-secondary btn-sm disabled" aria-disabled="true">{{getAmount(product)}}</button>
@@ -30,7 +29,7 @@
       </tr>
       <tr>
         <td colspan="5" class="text-right">Итого на сумму:</td>
-        <td>{{getTotalOrderSum | getNicePrice}}</td>
+        <td>{{getNicePrice(getTotalOrderSum)}}</td>
       </tr>
       </tbody>
     </table>
@@ -38,6 +37,7 @@
     <div>
       <textarea class="mt-2 w-100" placeholder="Комментарии к заказу(не обязательно)" v-model="comment" rows="2"></textarea>
     </div>
+    <!-- todo это убрать -->
     <button class="btn btn-danger" @click="handleActionBtn">Оформить заказ</button>
     <v-modal :is-modal-shown="isModalShown">
           <div class="modal-header">
@@ -105,11 +105,6 @@ export default {
     isOperatorPhoneShown: false,
     operatorPhone: '555-55-55'
   }),
-  filters: {
-    getNicePrice (price) {
-      return getNicePrice(price)
-    }
-  },
   computed: {
     ...mapGetters(['getPrice', 'getOrder', 'getTotalOrderSum'])
   },
@@ -118,6 +113,9 @@ export default {
   },
   methods: {
     ...mapActions(['addToOrder', 'clearOrder']),
+    getNicePrice (price) {
+      return getNicePrice(price, this.$t('currency'))
+    },
     getProductPrice (product) {
       const productInOrder = this.getOrder.find(el => el.id === product.id)
       let total = getNicePrice(0)
