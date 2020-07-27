@@ -4,12 +4,12 @@
     <table class="table table-sm table-striped" v-if="getPrice">
       <thead>
       <tr>
-        <th scope="col">{{ $t('num') }}</th>
-        <th scope="col">{{ $t('unitName') }}</th>
-        <th scope="col">{{ $t('price') }}</th>
-        <th scope="col">{{ $t('minAmount') }}</th>
-        <th scope="col">{{ $t('inOrder') }}</th>
-        <th scope="col">{{ $t('total') }}</th>
+        <th scope="col">{{ $t('table.num') }}</th>
+        <th scope="col">{{ $t('table.unitName') }}</th>
+        <th scope="col">{{ $t('table.price') }}</th>
+        <th scope="col">{{ $t('table.minAmount') }}</th>
+        <th scope="col">{{ $t('table.inOrder') }}</th>
+        <th scope="col">{{ $t('table.total') }}</th>
       </tr>
       </thead>
       <tbody>
@@ -28,7 +28,7 @@
         <td style="min-width: 95px">{{getProductPrice(product)}}</td>
       </tr>
       <tr>
-        <td colspan="5" class="text-right font-weight-bold">{{$t('superTotal')}}</td>
+        <td colspan="5" class="text-right font-weight-bold">{{$t('table.superTotal')}}</td>
         <td>{{getNicePrice(getTotalOrderSum)}}</td>
       </tr>
       </tbody>
@@ -70,7 +70,6 @@
       <div class="modal-body">
         <h3>{{$t('warnings.errorMsg')}}</h3>
         <p>{{$t('warnings.connectToUsMsg')}}</p>
-        <!--todo узнать телефон на всякий случай-->
         <h1>{{operatorPhone}}</h1>
       </div>
       <div class="modal-footer">
@@ -98,7 +97,7 @@ export default {
     name: '',
     comment: '',
     isOperatorPhoneShown: false,
-    operatorPhone: '555-55-55'
+    operatorPhone: '8-928-047-11-00'
   }),
   computed: {
     ...mapGetters(['getPrice', 'getOrder', 'getTotalOrderSum'])

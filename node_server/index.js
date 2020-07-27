@@ -36,10 +36,11 @@ const initCash = function (dbName) {
 }
 
 /* cash variables */
-let orders, price
+let orders, price, news
 // eslint-disable-next-line prefer-const
 orders = initCash('orders')
 price = initCash('price')
+news = initCash('news')
 
 io.sockets.on('connection', function (socket) {
   socket.on('getPrice', (data, cb) => {
@@ -48,10 +49,21 @@ io.sockets.on('connection', function (socket) {
     return cb(msg)
   })
 
+  socket.on('getNews', () => {
+    socket.emit('newsFromServer', news)
+  })
+
+  socket.on('updateNews', (data, cb) => {
+    news = data
+    fs.writeFileSync('./news.json', JSON.stringify(news, null, 2), 'utf-8')
+    const msg = ' News updated'
+    return cb(msg)
+  })
+
   socket.on('updatePrice', (data, cb) => {
     price = data
     fs.writeFileSync('./price.json', JSON.stringify(price, null, 2), 'utf-8')
-    const msg = 'Прайс обновлен'
+    const msg = 'Price updated'
     return cb(msg)
   })
 
@@ -63,7 +75,7 @@ io.sockets.on('connection', function (socket) {
     fs.writeFileSync('./orders.json', JSON.stringify(orders, null, 2), 'utf-8')
     /* Обновляем список новых заказов у админа */
     socket.emit('newOrderFromServer', orders)
-    const msg = 'ok'
+    const msg = 'New order added'
     return cb(msg)
   })
   socket.on('removeOrder', (id, cb) => {

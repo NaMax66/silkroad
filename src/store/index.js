@@ -11,11 +11,15 @@ export default new Vuex.Store({
     newPriceList: null,
     order: [],
     newOrders: null,
-    isAdmin: false
+    isAdmin: false,
+    news: null
   },
   getters: {
     getPrice (state) {
       return state.priceList
+    },
+    getNews (state) {
+      return state.news
     },
     getNewPrice (state) {
       if (!state.priceList) {
@@ -25,7 +29,7 @@ export default new Vuex.Store({
       if (state.newPriceList) {
         list = state.newPriceList
       } else {
-        /* делаем копию нового заказа из того, что есть на сервере. */
+        /* make a list copy for the admin */
         list = JSON.parse(JSON.stringify(state.priceList))
       }
       return list
@@ -57,6 +61,9 @@ export default new Vuex.Store({
     SOCKET_initialPrice (state, message) {
       message = validatePrice(message)
       state.priceList = message
+    },
+    SOCKET_newsFromServer (state, message) {
+      state.news = message
     },
     setAdmin (state) {
       state.isAdmin = true
