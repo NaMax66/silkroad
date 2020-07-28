@@ -43,6 +43,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
+import { v4 as uuidv4 } from 'uuid'
 
 export default {
   name: 'VAdminPriceTable',
@@ -56,34 +57,30 @@ export default {
     }
   }),
   computed: {
-    ...mapGetters(['getNewPrice'])
+    ...mapGetters(['getPrice'])
   },
   created () {
-    if (this.getNewPrice) {
+    this.$socket.emit('getPrice', null, (data) => {
+      this.setPrice(data)
       this.setList()
-    } else {
-      this.$socket.emit('getPrice', null, (data) => {
-        this.setPrice(data)
-        this.setList()
-      })
-    }
+    })
   },
   methods: {
-    ...mapMutations(['saveToLocal', 'addNewProduct', 'removePriceItemById', 'setPrice']),
+    ...mapMutations(['setPrice']),
     setList () {
-      this.productList = this.getNewPrice
+      this.productList = this.getPrice
     },
     removeItem (id) {
-      this.removePriceItemById(id)
-      this.$emit('dataChanged')
+      this.productList.list = this.productList.list.filter(el => el.id !== id)
+      this.$emit('save', this.productList)
     },
     handleInput () {
-      this.$emit('dataChanged')
-      this.saveToLocal(this.productList)
+      this.$emit('save', this.productList)
     },
     handleAdd () {
       this.newProduct.price = +this.newProduct.price
       this.newProduct.packageAmount = +this.newProduct.packageAmount
+      this.newProduct.id = uuidv4()
       const product = Object.assign({}, this.newProduct)
       this.newProduct = {
         id: null,
@@ -91,8 +88,8 @@ export default {
         price: 0,
         packageAmount: 0
       }
-      this.addNewProduct(product)
-      this.$emit('save', this.getNewPrice)
+      this.productList.list.push(product)
+      this.$emit('save', this.productList)
     }
   }
 }

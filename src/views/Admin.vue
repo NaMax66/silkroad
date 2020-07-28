@@ -14,9 +14,8 @@
     </form>
     <div v-if="getIsAdmin">
       <v-tabs :tabs="controlTabs" default-tab-id="1" @changeTab="changeControlTab" />
-      <v-admin-price-table v-if="currentTab.name === 'price'" @save="sendToServer" @dataChanged="isActionBtnActive = true"/>
-      <v-admin-news-table v-if="currentTab.name === 'news'" @save="sendToServer" @dataChanged="isActionBtnActive = true" />
-      <button :class="{'btn-danger': isActionBtnActive, 'btn-light': !isActionBtnActive}" class="btn fixed-bottom mb-2 ml-2" @click="sendToServer">{{$t('save')}}</button>
+      <v-admin-price-table v-if="currentTab.name === 'price'" @save="sendToServer"/>
+      <v-admin-news-table v-if="currentTab.name === 'news'" @save="sendToServer" />
     </div>
   </div>
 </template>
@@ -34,7 +33,6 @@ export default {
   },
   data: () => ({
     password: '',
-    isActionBtnActive: false,
     currentTab: {},
     controlTabs: [
       {

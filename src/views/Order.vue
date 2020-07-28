@@ -33,11 +33,9 @@
       </tr>
       </tbody>
     </table>
-    <!--todo ограничить число символов, сделать проверку-->
     <div>
       <textarea class="mt-2 w-100" :placeholder="$t('commentPlaceholder')" v-model="comment" rows="2"></textarea>
     </div>
-    <!-- todo это убрать -->
     <button class="btn btn-danger" @click="handleActionBtn">{{$t('makeOrder')}}</button>
     <v-modal :is-modal-shown="isModalShown">
           <div class="modal-header">
@@ -49,8 +47,8 @@
           <div class="modal-body">
             <p class="mb-2">{{$t('newOrderModal.msg')}}</p>
             <input type="text" class="form-control" :placeholder="$t('namePlaceholder')" v-model="name">
-            <!-- todo fix '-' -->
-            <input type="number" class="form-control  mt-2" :placeholder="$t('phonePlaceholder')" v-model="phone">
+            <input type="tel" pattern="[0-9]*" novalidate class="form-control  mt-2" :placeholder="$t('phonePlaceholder')" v-model="phone">
+            <input type="text" novalidate class="form-control  mt-2" :placeholder="$t('address')" v-model="address">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="isModalShown = false">{{$t('goBack')}}</button>
@@ -95,6 +93,7 @@ export default {
     isModalErrorShown: false,
     phone: '',
     name: '',
+    address: '',
     comment: '',
     isOperatorPhoneShown: false,
     operatorPhone: '8-928-047-11-00'
@@ -131,12 +130,13 @@ export default {
       this.isModalShown = true
     },
     async sendOrder () {
-      /* todo возвращать с сервера уникальный номер заказа. Показывать заказчику */
+      /* todo add the unique order number from server */
       const order = {
         id: uuidv4(),
         newOrder: this.getOrder,
         name: this.name,
         phone: this.phone,
+        address: this.address,
         comment: this.comment.substring(0, 3000),
         total: this.getTotalOrderSum,
         time: new Date().toLocaleString()
@@ -159,6 +159,7 @@ export default {
     closeModalSuccess () {
       this.isModalSuccessShown = false
       this.clearOrder()
+      this.comment = ''
     },
     closeModalError () {
       this.isModalErrorShown = false

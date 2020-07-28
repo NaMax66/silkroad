@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { v4 as uuidv4 } from 'uuid'
 import { validatePrice } from '@/utils'
 
 Vue.use(Vuex)
@@ -8,7 +7,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     priceList: null,
-    newPriceList: null,
     order: [],
     newOrders: null,
     isAdmin: false,
@@ -20,19 +18,6 @@ export default new Vuex.Store({
     },
     getNews (state) {
       return state.news
-    },
-    getNewPrice (state) {
-      if (!state.priceList) {
-        return
-      }
-      let list = {}
-      if (state.newPriceList) {
-        list = state.newPriceList
-      } else {
-        /* make a list copy for the admin */
-        list = JSON.parse(JSON.stringify(state.priceList))
-      }
-      return list
     },
     getOrder (state) {
       state.order.forEach(el => {
@@ -68,6 +53,7 @@ export default new Vuex.Store({
       state.isAdmin = true
     },
     setPrice (state, payload) {
+      payload = validatePrice(payload)
       state.priceList = payload
     },
     setNews (state, payload) {
@@ -91,22 +77,15 @@ export default new Vuex.Store({
     },
     clearOrder (state) {
       state.order = []
-    },
-    saveToLocal (state, payload) {
-      state.newPriceList = payload
-    },
-    addNewProduct (state, payload) {
-      payload.id = uuidv4()
-      if (!state.newPriceList) {
-        state.newPriceList.list = []
-      }
-      state.newPriceList.list.push(payload)
-    },
-    removePriceItemById (state, id) {
-      state.newPriceList.list = state.newPriceList.list.filter(el => el.id !== id)
     }
   },
   actions: {
+    setAdmin ({ commit }) {
+      commit('setAdmin')
+    },
+    setNews ({ commit }, payload) {
+      commit('setNews', payload)
+    },
     setPrice ({ commit }, price) {
       commit('setPrice', price)
     },
@@ -115,21 +94,6 @@ export default new Vuex.Store({
     },
     clearOrder ({ commit }) {
       commit('clearOrder')
-    },
-    saveToLocal ({ commit }, payload) {
-      commit('saveToLocal', payload)
-    },
-    addNewProduct ({ commit }, payload) {
-      commit('addNewProduct', payload)
-    },
-    removePriceItemById ({ commit }, id) {
-      commit('removePriceItemById', id)
-    },
-    setAdmin ({ commit }) {
-      commit('setAdmin')
-    },
-    setNews ({ commit }, payload) {
-      commit('setNews', payload)
     }
   },
   modules: {

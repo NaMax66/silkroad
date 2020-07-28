@@ -30,7 +30,7 @@ export const messages = {
     },
     newOrderModal: {
       header: 'Your order has been prepared',
-      msg: 'Enter your name and phone number',
+      msg: 'Enter your name, phone and address number',
       successMsg: 'Your order have been prepared!<br>We\'ll call you back.'
     },
     admin: {
@@ -82,7 +82,7 @@ export const messages = {
     },
     newOrderModal: {
       header: 'Ваш заказ подготовлен',
-      msg: 'Введите ваше имя и телефон',
+      msg: 'Введите ваше имя, телефон и адрес',
       successMsg: 'Ваш заказ отправлен!<br>Мы вам перезвоним.'
     },
     admin: {

@@ -17,7 +17,7 @@
       "id": "2e850159-bd94-4aa5-804c-0a87930e3b23",
       "name": "Paper Bag, 0.7L",
       "price": 1,
-      "packageAmount": "7"
+      "packageAmount": 7
     },
     {
       "id": "46296fee-32a1-4b64-af6e-83146d0c52ee",
@@ -29,19 +29,19 @@
       "id": "41123d58-83ea-4399-9977-4015c08e5f82",
       "name": "Plastic bottle, 0.5 L",
       "price": 0.15,
-      "packageAmount": "7"
+      "packageAmount": 7
     },
     {
       "id": "b14c444f-0493-4fa0-ad0d-c53392b4376c",
       "name": "Plastic Boxes 5L",
       "price": 1.5,
-      "packageAmount": "29"
+      "packageAmount": 29
     },
     {
-      "id": "90f75a4e-569e-4999-9c92-f5449c5dcf45",
-      "name": "Monseter",
-      "price": 0,
-      "packageAmount": 0
+      "id": "75fcef13-ddd6-4a47-8215-d3ad4738052a",
+      "name": "New stuff",
+      "price": 2,
+      "packageAmount": 2
     }
   ]
 }

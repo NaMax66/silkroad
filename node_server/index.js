@@ -84,15 +84,16 @@ io.sockets.on('connection', function (socket) {
   socket.on('newOrderFromClient', (data, cb) => {
     orders.unshift(data)
     fs.writeFileSync('./orders.json', JSON.stringify(orders, null, 2), 'utf-8')
-    /* Обновляем список новых заказов у админа */
+    /* update admin orders */
     socket.emit('newOrderFromServer', orders)
-    const msg = 'New order added'
+    const msg = 'ok'
     return cb(msg)
   })
   socket.on('removeOrder', (id, cb) => {
     orders = orders.filter(el => el.id !== id)
     fs.writeFileSync('./orders.json', JSON.stringify(orders, null, 2), 'utf-8')
     socket.emit('newOrderFromServer', orders)
+    /* don't change msg */
     const msg = 'ok'
     return cb(msg)
   })

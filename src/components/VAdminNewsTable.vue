@@ -78,7 +78,6 @@ export default {
       this.newsList = this.getNews
     },
     handleInput () {
-      this.$emit('dataChanged')
       this.$emit('save', this.newsList)
     },
     removeItem (id) {
