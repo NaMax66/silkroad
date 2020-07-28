@@ -64,7 +64,7 @@ export const messages = {
     makeOrder: 'Оформить заказ',
     goBack: 'Вернуться',
     currency: 'руб',
-    price: 'Цена',
+    price: 'Прайс',
     news: 'Новости',
     table: {
       price: 'Цена, шт.',

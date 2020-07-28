@@ -1,7 +1,7 @@
 <template>
   <div class="container" v-if="getIsAdmin">
     <div class="mt-3 border-bottom" v-for="item in getNewOrders" :key="item.id">
-      <div class="d-flex">
+      <div class="d-flex flex-column flex-sm-row">
         <h5 class="pr-3 text-danger">{{$t('clientName')}}: {{item.name}}</h5>
         <h5 class="pr-3">{{$t('phone')}}: {{item.phone}}</h5>
         <h5 class="pr-3">{{$t('address')}}: {{item.address}}</h5>

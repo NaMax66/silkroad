@@ -1,7 +1,7 @@
 <template>
   <div class="nav nav-tabs">
     <li class="nav-item" v-for="tab in tabs" :key="tab.id" @click="secCurrentTab(tab)">
-      <a class="nav-link" :class="{active: tab.id === currentTab.id}" href="#">{{tab.name}}</a>
+      <a class="nav-link" :class="{active: tab.id === currentTab.id}" href="#">{{$t(`${tab.name}`)}}</a>
     </li>
   </div>
 </template>
