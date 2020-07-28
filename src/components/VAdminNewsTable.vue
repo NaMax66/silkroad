@@ -10,7 +10,46 @@
       <th scope="col" class="border-top-0">{{$t('table.linkTxt')}}</th>
     </tr>
     </thead>
-    <tbody></tbody>
+    <tbody>
+    <tr class="v-table_product" v-for="(news, index) in newsList" :key="news.id">
+      <td>{{index}}</td>
+      <td>
+        <input class="w-100 border-0 bg-transparent" type="text" v-model="news.title" @input="handleInput">
+      </td>
+      <td class="v-table_price">
+        <input class="w-100 border-0 bg-transparent" type="text" v-model="news.subTitle" @input="handleInput">
+      </td>
+      <td class="v-table_pack">
+        <textarea class="w-100 border-0 bg-transparent" type="text" v-model="news.text" @input="handleInput"></textarea>
+      </td>
+      <td class="v-table_pack">
+        <input class="w-100 border-0 bg-transparent" type="text" v-model="news.link" @input="handleInput">
+      </td>
+      <td class="v-table_pack">
+        <input class="w-100 border-0 bg-transparent" type="text" v-model="news.linkTxt" @input="handleInput">
+      </td>
+      <td><button class="v-table_remove_btn btn btn-danger btn-sm" @click="removeItem(news.id)">&times;</button></td>
+    </tr>
+    <tr>
+      <td>*</td>
+      <td>
+        <input class="w-100 border-0 bg-transparent" type="text" v-model="newNews.title" @input="handleInput">
+      </td>
+      <td class="v-table_price">
+        <input class="w-100 border-0 bg-transparent" type="text" v-model="newNews.subTitle" @input="handleInput">
+      </td>
+      <td class="v-table_pack">
+        <textarea class="w-100 border-0 bg-transparent" type="text" v-model="newNews.text" @input="handleInput"></textarea>
+      </td>
+      <td class="v-table_pack">
+        <input class="w-100 border-0 bg-transparent" type="text" v-model="newNews.link" @input="handleInput">
+      </td>
+      <td class="v-table_pack">
+        <input class="w-100 border-0 bg-transparent" type="text" v-model="newNews.linkTxt" @input="handleInput">
+      </td>
+      <td><button class="btn btn-success btn-sm" @click="handleAdd">+</button></td>
+    </tr>
+    </tbody>
   </table>
 </template>
 
@@ -18,15 +57,33 @@
 import { mapMutations, mapGetters } from 'vuex'
 export default {
   name: 'VAdminNewsTable',
+  data: () => ({
+    newsList: null,
+    newNews: {
+      id: null,
+      title: '',
+      subTitle: '',
+      text: '',
+      link: '',
+      linkTxt: ''
+    }
+  }),
   computed: {
     ...mapGetters(['getNews'])
   },
   methods: {
-    ...mapMutations(['setNews'])
+    ...mapMutations(['setNews']),
+    setList () {
+      this.newsList = this.getNews
+    },
+    handleInput () {},
+    removeItem () {},
+    handleAdd () {}
   },
   created () {
     this.$socket.emit('getNews', null, (data) => {
       this.setNews(data)
+      this.setList()
     })
   }
 }
