@@ -102,7 +102,7 @@ export default new Vuex.Store({
       }
       state.newPriceList.list.push(payload)
     },
-    removeItemById (state, id) {
+    removePriceItemById (state, id) {
       state.newPriceList.list = state.newPriceList.list.filter(el => el.id !== id)
     }
   },
@@ -122,8 +122,8 @@ export default new Vuex.Store({
     addNewProduct ({ commit }, payload) {
       commit('addNewProduct', payload)
     },
-    removeItemById ({ commit }, id) {
-      commit('removeItemById', id)
+    removePriceItemById ({ commit }, id) {
+      commit('removePriceItemById', id)
     },
     setAdmin ({ commit }) {
       commit('setAdmin')

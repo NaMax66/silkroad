@@ -36,6 +36,12 @@
       "name": "Plastic Boxes 5L",
       "price": 1.5,
       "packageAmount": "29"
+    },
+    {
+      "id": "90f75a4e-569e-4999-9c92-f5449c5dcf45",
+      "name": "Monseter",
+      "price": 0,
+      "packageAmount": 0
     }
   ]
 }

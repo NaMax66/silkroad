@@ -69,17 +69,17 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['saveToLocal', 'addNewProduct', 'removeItemById', 'setPrice']),
+    ...mapMutations(['saveToLocal', 'addNewProduct', 'removePriceItemById', 'setPrice']),
+    setList () {
+      this.productList = this.getNewPrice
+    },
     removeItem (id) {
-      this.removeItemById(id)
+      this.removePriceItemById(id)
       this.$emit('dataChanged')
     },
     handleInput () {
       this.$emit('dataChanged')
       this.saveToLocal(this.productList)
-    },
-    setList () {
-      this.productList = this.getNewPrice
     },
     handleAdd () {
       this.newProduct.price = +this.newProduct.price
@@ -92,7 +92,7 @@ export default {
         packageAmount: 0
       }
       this.addNewProduct(product)
-      this.$emit('save')
+      this.$emit('save', this.getNewPrice)
     }
   }
 }

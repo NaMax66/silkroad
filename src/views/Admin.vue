@@ -48,7 +48,7 @@ export default {
     ]
   }),
   computed: {
-    ...mapGetters(['getNewPrice', 'getIsAdmin'])
+    ...mapGetters(['getIsAdmin'])
   },
   methods: {
     ...mapActions(['setAdmin']),
@@ -58,7 +58,7 @@ export default {
         this.setAdmin()
       }
     },
-    sendToServer () {
+    sendToServer (data) {
       let eventName = ''
       const currentTabName = this.currentTab.name
       if (currentTabName === 'price') {
@@ -68,7 +68,7 @@ export default {
         eventName = 'updateNews'
       }
       this.isActionBtnActive = false
-      this.$socket.emit(eventName, this.getNewPrice, msg => {
+      this.$socket.emit(eventName, data, msg => {
         console.log(msg)
       })
     },

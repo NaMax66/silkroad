@@ -19,7 +19,7 @@
       <td class="v-table_price">
         <input class="w-100 border-0 bg-transparent" type="text" v-model="news.subTitle" @input="handleInput">
       </td>
-      <td class="v-table_pack">
+      <td class="v-table_pack w-25">
         <textarea class="w-100 border-0 bg-transparent" type="text" v-model="news.text" @input="handleInput"></textarea>
       </td>
       <td class="v-table_pack">
@@ -38,7 +38,7 @@
       <td class="v-table_price">
         <input class="w-100 border-0 bg-transparent" type="text" v-model="newNews.subTitle" @input="handleInput">
       </td>
-      <td class="v-table_pack">
+      <td class="v-table_pack w-25">
         <textarea class="w-100 border-0 bg-transparent" type="text" v-model="newNews.text" @input="handleInput"></textarea>
       </td>
       <td class="v-table_pack">
@@ -55,6 +55,7 @@
 
 <script>
 import { mapMutations, mapGetters } from 'vuex'
+import { v4 as uuidv4 } from 'uuid'
 export default {
   name: 'VAdminNewsTable',
   data: () => ({
@@ -78,7 +79,20 @@ export default {
     },
     handleInput () {},
     removeItem () {},
-    handleAdd () {}
+    handleAdd () {
+      this.newNews.id = uuidv4()
+      const news = Object.assign({}, this.newNews)
+      this.newsList.push(news)
+      this.newNews = {
+        id: null,
+        title: '',
+        subTitle: '',
+        text: '',
+        link: '',
+        linkTxt: ''
+      }
+      this.$emit('save', this.newsList)
+    }
   },
   created () {
     this.$socket.emit('getNews', null, (data) => {
