@@ -12,14 +12,19 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'Home',
   computed: {
     ...mapGetters(['getNews'])
   },
+  methods: {
+    ...mapMutations(['setNews'])
+  },
   created () {
-    this.$socket.emit('getNews', null, () => {})
+    this.$socket.emit('getNews', null, (data) => {
+      this.setNews(data)
+    })
   }
 }
 </script>

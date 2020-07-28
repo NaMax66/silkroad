@@ -67,8 +67,11 @@ export default new Vuex.Store({
     setAdmin (state) {
       state.isAdmin = true
     },
-    changePrice (state, payload) {
+    setPrice (state, payload) {
       state.priceList = payload
+    },
+    setNews (state, payload) {
+      state.news = payload
     },
     addToOrder (state, payload) {
       const el = state.order.find(el => el.id === payload.id)
@@ -104,8 +107,8 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    changePrice ({ commit }, price) {
-      commit('changePrice', price)
+    setPrice ({ commit }, price) {
+      commit('setPrice', price)
     },
     addToOrder ({ commit }, payload) {
       commit('addToOrder', payload)
@@ -124,6 +127,9 @@ export default new Vuex.Store({
     },
     setAdmin ({ commit }) {
       commit('setAdmin')
+    },
+    setNews ({ commit }, payload) {
+      commit('setNews', payload)
     }
   },
   modules: {

@@ -104,11 +104,11 @@ export default {
   },
   created () {
     this.$socket.emit('getPrice', null, (data) => {
-      this.changePrice(data)
+      this.setPrice(data)
     })
   },
   methods: {
-    ...mapActions(['addToOrder', 'clearOrder', 'changePrice']),
+    ...mapActions(['addToOrder', 'clearOrder', 'setPrice']),
     getNicePrice (price) {
       return getNicePrice(price, this.$t('currency'))
     },

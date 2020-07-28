@@ -63,13 +63,13 @@ export default {
       this.setList()
     } else {
       this.$socket.emit('getPrice', null, (data) => {
-        this.changePrice(data)
+        this.setPrice(data)
         this.setList()
       })
     }
   },
   methods: {
-    ...mapMutations(['saveToLocal', 'addNewProduct', 'removeItemById', 'changePrice']),
+    ...mapMutations(['saveToLocal', 'addNewProduct', 'removeItemById', 'setPrice']),
     removeItem (id) {
       this.removeItemById(id)
       this.$emit('dataChanged')

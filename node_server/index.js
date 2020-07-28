@@ -50,8 +50,8 @@ io.sockets.on('connection', function (socket) {
     return cb(price)
   })
 
-  socket.on('getNews', () => {
-    socket.emit('newsFromServer', news)
+  socket.on('getNews', (data, cb) => {
+    return cb(news)
   })
 
   socket.on('updateNews', (data, cb) => {
