@@ -14,38 +14,38 @@
     <tr class="v-table_product" v-for="(news, index) in newsList" :key="news.id">
       <td>{{index}}</td>
       <td>
-        <input class="w-100 border-0 bg-transparent" type="text" v-model="news.title" @input="handleInput">
+        <input class="w-100 bg-transparent" type="text" v-model="news.title" @input="handleInput">
       </td>
       <td class="v-table_price">
-        <input class="w-100 border-0 bg-transparent" type="text" v-model="news.subTitle" @input="handleInput">
+        <input class="w-100 bg-transparent" type="text" v-model="news.subTitle" @input="handleInput">
       </td>
       <td class="v-table_pack w-25">
-        <textarea class="w-100 border-0 bg-transparent" type="text" v-model="news.text" @input="handleInput"></textarea>
+        <textarea class="w-100 bg-transparent" type="text" v-model="news.text" @input="handleInput"></textarea>
       </td>
       <td class="v-table_pack">
-        <input class="w-100 border-0 bg-transparent" type="text" v-model="news.link" @input="handleInput">
+        <input class="w-100 bg-transparent" type="text" v-model="news.link" @input="handleInput">
       </td>
       <td class="v-table_pack">
-        <input class="w-100 border-0 bg-transparent" type="text" v-model="news.linkTxt" @input="handleInput">
+        <input class="w-100 bg-transparent" type="text" v-model="news.linkTxt" @input="handleInput">
       </td>
       <td><button class="v-table_remove_btn btn btn-danger btn-sm" @click="removeItem(news.id)">&times;</button></td>
     </tr>
     <tr>
       <td>*</td>
       <td>
-        <input class="w-100 border-0 bg-transparent" type="text" v-model="newNews.title" @input="handleInput">
+        <input class="w-100 bg-transparent" type="text" v-model="newNews.title" @input="handleInput">
       </td>
       <td class="v-table_price">
-        <input class="w-100 border-0 bg-transparent" type="text" v-model="newNews.subTitle" @input="handleInput">
+        <input class="w-100 bg-transparent" type="text" v-model="newNews.subTitle" @input="handleInput">
       </td>
       <td class="v-table_pack w-25">
-        <textarea class="w-100 border-0 bg-transparent" type="text" v-model="newNews.text" @input="handleInput"></textarea>
+        <textarea class="w-100 bg-transparent" type="text" v-model="newNews.text" @input="handleInput"></textarea>
       </td>
       <td class="v-table_pack">
-        <input class="w-100 border-0 bg-transparent" type="text" v-model="newNews.link" @input="handleInput">
+        <input class="w-100 bg-transparent" type="text" v-model="newNews.link" @input="handleInput">
       </td>
       <td class="v-table_pack">
-        <input class="w-100 border-0 bg-transparent" type="text" v-model="newNews.linkTxt" @input="handleInput">
+        <input class="w-100 bg-transparent" type="text" v-model="newNews.linkTxt" @input="handleInput">
       </td>
       <td><button class="btn btn-success btn-sm" @click="handleAdd">+</button></td>
     </tr>
@@ -77,8 +77,14 @@ export default {
     setList () {
       this.newsList = this.getNews
     },
-    handleInput () {},
-    removeItem () {},
+    handleInput () {
+      this.$emit('dataChanged')
+      this.$emit('save', this.newsList)
+    },
+    removeItem (id) {
+      this.newsList = this.newsList.filter(el => el.id !== id)
+      this.$emit('save', this.newsList)
+    },
     handleAdd () {
       this.newNews.id = uuidv4()
       const news = Object.assign({}, this.newNews)
@@ -104,5 +110,7 @@ export default {
 </script>
 
 <style scoped>
-
+  input {
+    border: 1px solid #999;
+  }
 </style>
