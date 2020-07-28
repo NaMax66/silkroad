@@ -45,7 +45,7 @@
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
-  name: 'VTable',
+  name: 'VAdminPriceTable',
   data: () => ({
     productList: {},
     newProduct: {
@@ -59,15 +59,17 @@ export default {
     ...mapGetters(['getNewPrice'])
   },
   created () {
-    this.$socket.emit('getPrice', null, (msg) => {
-      if (msg === 'ok') {
+    if (this.getNewPrice) {
+      this.setList()
+    } else {
+      this.$socket.emit('getPrice', null, (data) => {
+        this.changePrice(data)
         this.setList()
-        this.saveToLocal(this.productList)
-      }
-    })
+      })
+    }
   },
   methods: {
-    ...mapMutations(['saveToLocal', 'addNewProduct', 'removeItemById']),
+    ...mapMutations(['saveToLocal', 'addNewProduct', 'removeItemById', 'changePrice']),
     removeItem (id) {
       this.removeItemById(id)
       this.$emit('dataChanged')

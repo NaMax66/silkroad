@@ -21,7 +21,12 @@ export const messages = {
       minAmount: 'min. qty',
       inOrder: 'In order, qty',
       total: 'Total',
-      superTotal: 'TOTAL:'
+      superTotal: 'TOTAL:',
+      title: 'Title',
+      subTitle: 'Subtitle',
+      text: 'Text',
+      link: 'Link',
+      linkTxt: 'Link text'
     },
     newOrderModal: {
       header: 'Your order has been prepared',
@@ -68,7 +73,12 @@ export const messages = {
       minAmount: 'Мин. кол-во',
       inOrder: 'В заказе, шт',
       total: 'Сумма',
-      superTotal: 'Итого на сумму:'
+      superTotal: 'Итого на сумму:',
+      title: 'Заголовок',
+      subTitle: 'Подзаголовок',
+      text: 'Текст',
+      link: 'Ссылка',
+      linkTxt: 'Текст ссылки'
     },
     newOrderModal: {
       header: 'Ваш заказ подготовлен',

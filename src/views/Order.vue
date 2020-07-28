@@ -103,10 +103,12 @@ export default {
     ...mapGetters(['getPrice', 'getOrder', 'getTotalOrderSum'])
   },
   created () {
-    this.$socket.emit('getPrice', null, () => {})
+    this.$socket.emit('getPrice', null, (data) => {
+      this.changePrice(data)
+    })
   },
   methods: {
-    ...mapActions(['addToOrder', 'clearOrder']),
+    ...mapActions(['addToOrder', 'clearOrder', 'changePrice']),
     getNicePrice (price) {
       return getNicePrice(price, this.$t('currency'))
     },

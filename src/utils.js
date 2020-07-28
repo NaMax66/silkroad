@@ -1,7 +1,7 @@
 console.log(this)
 
 const isValid = (price) => {
-  if (!price) {
+  if (!price && price !== 0) {
     console.log('price is invalid. Value = ', price)
   }
   return !!price

@@ -35,7 +35,6 @@ export default new Vuex.Store({
       return list
     },
     getOrder (state) {
-      /* получаем общую сумму по каждому товару и записываем в объект */
       state.order.forEach(el => {
         el.totalSum = el.amount * el.price
       })
@@ -79,12 +78,9 @@ export default new Vuex.Store({
           extraAmount *= -1
         }
         el.amount += extraAmount
-        /* если кол-во ноль - удаляем из заказа */
         if (el.amount <= 0) state.order = state.order.filter(item => item.id !== el.id)
       } else {
-        /* если нет элемента в заказах и нажали минус - ничего не делаем */
         if (payload.operator === 'minus') return
-        /* если не находим элемент в заказах - берем его из прайса */
         const newEl = Object.assign({}, state.priceList.list.find(el => el.id === payload.id))
         newEl.amount = newEl.packageAmount
         state.order.push(newEl)

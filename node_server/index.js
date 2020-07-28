@@ -47,9 +47,7 @@ news = initCash('news')
 
 io.sockets.on('connection', function (socket) {
   socket.on('getPrice', (data, cb) => {
-    socket.emit('initialPrice', price)
-    const msg = 'ok'
-    return cb(msg)
+    return cb(price)
   })
 
   socket.on('getNews', () => {
@@ -58,21 +56,25 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('updateNews', (data, cb) => {
     let msg = ''
-
     if (isValid(data)) {
       news = data
       fs.writeFileSync('./news.json', JSON.stringify(news, null, 2), 'utf-8')
       msg = 'News updated'
     } else {
-      msg = 'Wrong Data!'
+      msg = 'Wrong news data from the client!'
     }
     return cb(msg)
   })
 
   socket.on('updatePrice', (data, cb) => {
-    price = data
-    fs.writeFileSync('./price.json', JSON.stringify(price, null, 2), 'utf-8')
-    const msg = 'Price updated'
+    let msg = ''
+    if (isValid(data)) {
+      price = data
+      fs.writeFileSync('./price.json', JSON.stringify(price, null, 2), 'utf-8')
+      msg = 'Price list updated'
+    } else {
+      msg = 'Wrong price data from the client!'
+    }
     return cb(msg)
   })
 

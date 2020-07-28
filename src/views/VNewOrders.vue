@@ -54,9 +54,7 @@ export default {
     },
     removeOrder (id) {
       this.$socket.emit('removeOrder', id, (msg) => {
-        if (msg === 'ok') {
-          console.log('Заказ удален')
-        }
+        console.log(msg)
       })
     }
   }
