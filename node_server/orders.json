@@ -17,40 +17,5 @@
     "comment": "I need some stuff!",
     "total": 12,
     "time": "28.07.2020, 12:35:21"
-  },
-  {
-    "id": "a5aa0a71-4480-4bcd-8a17-9333d2bb2ad4",
-    "newOrder": [
-      {
-        "id": "975f285d-88af-44fb-b7a9-27bb33a76f79",
-        "name": "New stuff",
-        "price": 0,
-        "packageAmount": 0,
-        "amount": 0,
-        "totalSum": 0
-      },
-      {
-        "id": "41123d58-83ea-4399-9977-4015c08e5f82",
-        "name": "Plastic bottle, 0.5 L",
-        "price": 0.15,
-        "packageAmount": 7,
-        "amount": 21,
-        "totalSum": 3.15
-      },
-      {
-        "id": "b14c444f-0493-4fa0-ad0d-c53392b4376c",
-        "name": "Plastic Boxes 5L",
-        "price": 1.5,
-        "packageAmount": 29,
-        "amount": 87,
-        "totalSum": 130.5
-      }
-    ],
-    "name": "1",
-    "phone": "2",
-    "address": "3",
-    "comment": "",
-    "total": 133.65,
-    "time": "28.07.2020, 12:24:00"
   }
 ]

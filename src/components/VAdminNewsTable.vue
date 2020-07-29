@@ -19,7 +19,7 @@
       <td class="v-table_price">
         <input class="w-100 bg-transparent" type="text" v-model="news.subTitle" @input="handleInput">
       </td>
-      <td class="v-table_pack w-25">
+      <td class="v-table_pack v-admin-table_text">
         <textarea class="w-100 bg-transparent" type="text" v-model="news.text" @input="handleInput"></textarea>
       </td>
       <td class="v-table_pack">
@@ -38,7 +38,7 @@
       <td class="v-table_price">
         <input class="w-100 bg-transparent" type="text" v-model="newNews.subTitle" @input="handleInput">
       </td>
-      <td class="v-table_pack w-25">
+      <td class="v-table_pack v-admin-table_text">
         <textarea class="w-100 bg-transparent" type="text" v-model="newNews.text" @input="handleInput"></textarea>
       </td>
       <td class="v-table_pack">
@@ -111,5 +111,9 @@ export default {
 <style scoped>
   input {
     border: 1px solid #999;
+  }
+  .v-admin-table_text {
+    width: 25%;
+    min-width: 150px;
   }
 </style>

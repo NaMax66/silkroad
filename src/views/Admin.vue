@@ -12,7 +12,7 @@
       </div>
       <button @click.prevent="checkPass" class="btn btn-danger">{{$t('admin.enter')}}</button>
     </form>
-    <div v-if="getIsAdmin">
+    <div v-if="getIsAdmin" class="overflow-auto">
       <v-tabs :tabs="controlTabs" default-tab-id="1" @changeTab="changeControlTab" />
       <v-admin-price-table v-if="currentTab.name === 'price'" @save="sendToServer"/>
       <v-admin-news-table v-if="currentTab.name === 'news'" @save="sendToServer" />

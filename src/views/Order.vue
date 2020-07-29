@@ -1,38 +1,40 @@
 <template>
   <div class="container">
     <h1 class="text-danger mb-5" v-if="isOperatorPhoneShown">{{$t('warnings.connectToUsMsg')}} <br> {{operatorPhone}}</h1>
-    <table class="table table-sm table-striped" v-if="getPrice">
-      <thead>
-      <tr>
-        <th scope="col">{{ $t('table.num') }}</th>
-        <th scope="col">{{ $t('table.unitName') }}</th>
-        <th scope="col">{{ $t('table.price') }}</th>
-        <th scope="col">{{ $t('table.minAmount') }}</th>
-        <th scope="col">{{ $t('table.inOrder') }}</th>
-        <th scope="col">{{ $t('table.total') }}</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr v-for="(product, index) in getPrice.list" :key="product.id">
-        <td scope="row">{{ index }}</td>
-        <td>{{product.name}}</td>
-        <td>{{getNicePrice(product.price) }}</td>
-        <td>{{product.packageAmount}} <span>{{$t('units.piece')}}</span></td>
-        <th scope="col" style="min-width: 110px;">
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-secondary btn-sm" @click="addAmount('minus', product.id)">-</button>
-            <button type="button" style="min-width: 40px" class="btn btn-secondary btn-sm disabled" aria-disabled="true">{{getAmount(product)}}</button>
-            <button type="button" class="btn btn-secondary btn-sm" @click="addAmount('plus', product.id)">+</button>
-          </div>
-        </th>
-        <td style="min-width: 95px">{{getProductPrice(product)}}</td>
-      </tr>
-      <tr>
-        <td colspan="5" class="text-right font-weight-bold">{{$t('table.superTotal')}}</td>
-        <td>{{getNicePrice(getTotalOrderSum)}}</td>
-      </tr>
-      </tbody>
-    </table>
+    <div class="overflow-auto">
+      <table class="table table-sm table-striped" v-if="getPrice">
+        <thead>
+        <tr>
+          <th scope="col">{{ $t('table.num') }}</th>
+          <th scope="col">{{ $t('table.unitName') }}</th>
+          <th scope="col">{{ $t('table.price') }}</th>
+          <th scope="col">{{ $t('table.minAmount') }}</th>
+          <th scope="col">{{ $t('table.inOrder') }}</th>
+          <th scope="col">{{ $t('table.total') }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(product, index) in getPrice.list" :key="product.id">
+          <td scope="row">{{ index }}</td>
+          <td>{{product.name}}</td>
+          <td>{{getNicePrice(product.price) }}</td>
+          <td>{{product.packageAmount}} <span>{{$t('units.piece')}}</span></td>
+          <th scope="col" style="min-width: 110px;">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-secondary btn-sm" @click="addAmount('minus', product.id)">-</button>
+              <button type="button" style="min-width: 40px" class="btn btn-secondary btn-sm disabled" aria-disabled="true">{{getAmount(product)}}</button>
+              <button type="button" class="btn btn-secondary btn-sm" @click="addAmount('plus', product.id)">+</button>
+            </div>
+          </th>
+          <td style="min-width: 95px">{{getProductPrice(product)}}</td>
+        </tr>
+        <tr>
+          <td colspan="5" class="text-right font-weight-bold">{{$t('table.superTotal')}}</td>
+          <td>{{getNicePrice(getTotalOrderSum)}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
     <div>
       <textarea class="mt-2 w-100" :placeholder="$t('commentPlaceholder')" v-model="comment" rows="2"></textarea>
     </div>

@@ -85,7 +85,7 @@ io.sockets.on('connection', function (socket) {
     orders.unshift(data)
     fs.writeFileSync('./orders.json', JSON.stringify(orders, null, 2), 'utf-8')
     /* update admin orders */
-    socket.emit('newOrderFromServer', orders)
+    socket.broadcast.emit('newOrderFromServer', orders)
     const msg = 'ok'
     return cb(msg)
   })

@@ -8,6 +8,7 @@
       </div>
       <p class="mb-1 mt-3">{{$t('comment')}}: {{item.comment}}</p>
       <h6 class="mb-3 text-danger">{{$t('time')}}: {{item.time}}</h6>
+      <div class="overflow-auto">
       <table class="mt-2 table table-sm table-striped" v-if="getNewOrders">
         <thead>
         <tr>
@@ -33,6 +34,7 @@
         </tr>
         </tbody>
       </table>
+      </div>
     </div>
   </div>
 </template>
