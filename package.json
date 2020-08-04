@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "heroku-postbuild": "npm run build",
     "lint": "vue-cli-service lint",
     "srv": "cd node_server && node index",
     "start": "node app.js"
