@@ -99,7 +99,7 @@ io.sockets.on('connection', function (socket) {
   })
 })
 
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || process.env.PORT || 8000
 
 http.listen(PORT, () => {
   console.log(`listening on ${PORT}`)
