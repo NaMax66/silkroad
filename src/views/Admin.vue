@@ -1,6 +1,7 @@
 <template>
   <div class="container mb-5">
     <form class="col-lg-4" v-if="!getIsAdmin">
+      <p>This is a testing app. password: 1</p>
       <div class="form-group">
         <input
           v-model="password"
@@ -52,7 +53,7 @@ export default {
     ...mapActions(['setAdmin']),
     checkPass () {
       /* todo: add authorisation logic to server */
-      if (this.password === 'salam') {
+      if (this.password === '1') {
         this.setAdmin()
       }
     },
