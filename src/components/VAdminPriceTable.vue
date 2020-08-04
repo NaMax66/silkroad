@@ -6,7 +6,7 @@
         <th scope="col" class="border-top-0">{{$t('table.num')}}</th>
         <th scope="col" class="border-top-0">{{$t('table.unitName')}}</th>
         <th scope="col" class="border-top-0">{{$t('table.price')}}</th>
-        <th scope="col" class="border-top-0">{{$t('table.total')}}</th>
+        <th scope="col" class="border-top-0">{{$t('table.minAmount')}}</th>
       </tr>
       </thead>
       <tbody>

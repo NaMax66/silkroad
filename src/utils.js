@@ -32,7 +32,8 @@ export const validateOrders = (orders) => {
 }
 
 export const getUrl = () => {
-  let url = 'https://silkroad.na4u.ru/'
+  // let url = 'https://silkroad.na4u.ru/'
+  let url = 'https://fast-supply.herokuapp.com/'
   if (process.env.NODE_ENV === 'development') {
     url = 'http://localhost:8000/'
   }
