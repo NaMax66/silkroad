@@ -38,7 +38,7 @@
     <div>
       <textarea class="mt-2 w-100" :placeholder="$t('commentPlaceholder')" v-model="comment" rows="2"></textarea>
     </div>
-    <button class="btn btn-danger" @click="handleActionBtn">{{$t('makeOrder')}}</button>
+    <button class="btn btn-danger mb-5" @click="handleActionBtn">{{$t('makeOrder')}}</button>
     <v-modal :is-modal-shown="isModalShown">
           <div class="modal-header">
             <h5 class="modal-title">{{$t('newOrderModal.header')}}</h5>
