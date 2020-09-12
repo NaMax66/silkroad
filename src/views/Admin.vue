@@ -46,16 +46,15 @@ export default {
       }
     ]
   }),
-  computed: {
-    ...mapGetters(['getIsAdmin'])
-  },
+  computed: { ...mapGetters(['getIsAdmin']) },
   methods: {
     ...mapActions(['setAdmin']),
     checkPass () {
-      /* todo: add authorisation logic to server */
-      if (this.password === '1') {
-        this.setAdmin()
-      }
+      this.$socket.emit('checkPassword', this.password, msg => {
+        if (msg === 'ok') {
+          this.setAdmin()
+        }
+      })
     },
     sendToServer (data) {
       let eventName = ''

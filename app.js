@@ -46,6 +46,14 @@ price = initCash('price')
 news = initCash('news')
 
 io.sockets.on('connection', function (socket) {
+  socket.on('checkPassword', (data, cb) => {
+    let isValid = 'error'
+    if (data === '1') {
+      isValid = 'ok'
+    }
+    return cb(isValid)
+  })
+
   socket.on('getPrice', (data, cb) => {
     return cb(price)
   })
